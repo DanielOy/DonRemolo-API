@@ -1,0 +1,22 @@
+[
+  {
+    "Id": 1,
+    "Name": "Pizzas"
+  },
+  {
+    "Id": 2,
+    "Name": "Pastas"
+  },
+  {
+    "Id": 3,
+    "Name": "Empanadas"
+  },
+  {
+    "Id": 4,
+    "Name": "Bebidas"
+  },
+  {
+    "Id": 5,
+    "Name": "Postres"
+  }
+]

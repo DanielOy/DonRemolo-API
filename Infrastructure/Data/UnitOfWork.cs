@@ -1,4 +1,5 @@
-﻿using Core.Interfaces;
+﻿using Core.Entities;
+using Core.Interfaces;
 using System;
 using System.Threading.Tasks;
 
@@ -9,9 +10,15 @@ namespace Infrastructure.Data
         private readonly StoreContext _context;
         private bool disposed = false;
 
+        public IGenericRepository<Product> Products { get; }
+        public IGenericRepository<Category> Categories { get; }
+
         public UnitOfWork(StoreContext context)
         {
             _context = context;
+
+            Products = new GenericRepository<Product>(_context);
+            Categories = new GenericRepository<Category>(_context);
         }
 
         public async Task Save()
