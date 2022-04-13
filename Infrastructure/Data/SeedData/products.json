@@ -3,7 +3,7 @@
     "Id": 1,
     "Name": "Fugazzeta",
     "Description": "Fugazzeta",
-    "Picture": "",
+    "Picture": "pizza.png",
     "Price": 1,
     "CategoryId": 1
   },
@@ -11,71 +11,399 @@
     "Id": 2,
     "Name": "Napolitana",
     "Description": "Napolitana",
-    "Picture": "",
+    "Picture": "pizza.png",
     "Price": 1,
     "CategoryId": 1
   },
   {
     "Id": 3,
-    "Name": "Pappardele",
-    "Description": "Pappardele",
-    "Picture": "",
+    "Name": "Jamón cocido",
+    "Description": "Jamón cocido",
+    "Picture": "pizza.png",
     "Price": 1,
-    "CategoryId": 2
+    "CategoryId": 1
   },
   {
     "Id": 4,
-    "Name": "Ñoquis",
-    "Description": "Ñoquis",
-    "Picture": "",
+    "Name": "Calabresa",
+    "Description": "Calabresa",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 5,
+    "Name": "Provolone",
+    "Description": "Provolone",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 6,
+    "Name": "Especial",
+    "Description": "Especial",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 7,
+    "Name": "Rúcula",
+    "Description": "Rúcula",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 8,
+    "Name": "4 Quesos",
+    "Description": "4 Quesos",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 9,
+    "Name": "Burrata",
+    "Description": "Burrata",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 10,
+    "Name": "Appieto",
+    "Description": "Appieto",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 11,
+    "Name": "De mar",
+    "Description": "De mar",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 12,
+    "Name": "4 Estaciones",
+    "Description": "4 Estaciones",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 13,
+    "Name": "Ramona",
+    "Description": "Ramona",
+    "Picture": "pizza.png",
+    "Price": 1,
+    "CategoryId": 1
+  },
+  {
+    "Id": 14,
+    "Name": "Pappardele",
+    "Description": "Pappardele",
+    "Picture": "pasta.png",
     "Price": 1,
     "CategoryId": 2
   },
   {
-    "Id": 5,
+    "Id": 15,
+    "Name": "Ñoquis",
+    "Description": "Ñoquis",
+    "Picture": "pasta.png",
+    "Price": 1,
+    "CategoryId": 2
+  },
+  {
+    "Id": 16,
+    "Name": "Ravioles de calabaza y castañas",
+    "Description": "Ravioles de calabaza y castañas",
+    "Picture": "pasta.png",
+    "Price": 1,
+    "CategoryId": 2
+  },
+  {
+    "Id": 17,
+    "Name": "Sorrentino de Jamón crudo y queso",
+    "Description": "Sorrentino de Jamón crudo y queso",
+    "Picture": "pasta.png",
+    "Price": 1,
+    "CategoryId": 2
+  },
+  {
+    "Id": 18,
+    "Name": "Lasagna de carne",
+    "Description": "Lasagna de carne",
+    "Picture": "pasta.png",
+    "Price": 1,
+    "CategoryId": 2
+  },
+  {
+    "Id": 19,
+    "Name": "Lasagna de verduras",
+    "Description": "Lasagna de verduras",
+    "Picture": "pasta.png",
+    "Price": 1,
+    "CategoryId": 2
+  },
+  {
+    "Id": 20,
     "Name": "Carne",
     "Description": "Carne",
-    "Picture": "",
+    "Picture": "empanada.png",
     "Price": 1,
     "CategoryId": 3
   },
   {
-    "Id": 6,
+    "Id": 21,
     "Name": "Carne Molida",
     "Description": "Carne Molida",
-    "Picture": "",
+    "Picture": "empanada.png",
     "Price": 1,
     "CategoryId": 3
   },
   {
-    "Id": 7,
+    "Id": 22,
+    "Name": "Pollo",
+    "Description": "Pollo",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 23,
+    "Name": "Jamón y Queso",
+    "Description": "Jamón y Queso",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 24,
+    "Name": "Tipo Árabe",
+    "Description": "Tipo Árabe",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 25,
+    "Name": "Carne cortada a cuchillo",
+    "Description": "Carne cortada a cuchillo",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 26,
+    "Name": "Choclo y queso",
+    "Description": "Choclo y queso",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 27,
+    "Name": "Champiñones",
+    "Description": "Champiñones",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 28,
+    "Name": "Palmito",
+    "Description": "Palmito",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 29,
+    "Name": "Verdura completa",
+    "Description": "Verdura completa",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 30,
+    "Name": "Panceta, mozzarella y ciruela",
+    "Description": "Panceta, mozzarella y ciruela",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 31,
+    "Name": "4 quesos y jamón",
+    "Description": "4 quesos y jamón",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 32,
+    "Name": "Roquefort, apio y nuez",
+    "Description": "Roquefort, apio y nuez",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 33,
+    "Name": "Camarones",
+    "Description": "Camarones",
+    "Picture": "empanada.png",
+    "Price": 1,
+    "CategoryId": 3
+  },
+  {
+    "Id": 34,
     "Name": "Agua",
     "Description": "Agua",
-    "Picture": "",
+    "Picture": "bebida.png",
     "Price": 1,
     "CategoryId": 4
   },
   {
-    "Id": 8,
+    "Id": 35,
     "Name": "Agua mineral",
     "Description": "Agua Mineral",
-    "Picture": "",
+    "Picture": "bebida.png",
     "Price": 1,
     "CategoryId": 4
   },
   {
-    "Id": 9,
+    "Id": 36,
+    "Name": "Agua saborizada",
+    "Description": "Agua saborizada",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 37,
+    "Name": "Gaseosa",
+    "Description": "Gaseosa",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 38,
+    "Name": "Limonada",
+    "Description": "Limonada",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 39,
+    "Name": "Stella",
+    "Description": "Stella",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 40,
+    "Name": "Heineken",
+    "Description": "Heineken",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 41,
+    "Name": "Bud",
+    "Description": "Bud",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 42,
+    "Name": "Santa Julia",
+    "Description": "Santa Julia",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 43,
+    "Name": "Portillo",
+    "Description": "Portillo",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 44,
+    "Name": "Killka",
+    "Description": "Killka",
+    "Picture": "bebida.png",
+    "Price": 1,
+    "CategoryId": 4
+  },
+  {
+    "Id": 45,
     "Name": "Pie Limón",
     "Description": "Pie Limón",
-    "Picture": "",
+    "Picture": "postre.png",
     "Price": 1,
     "CategoryId": 5
   },
   {
-    "Id": 10,
+    "Id": 46,
     "Name": "Pie Frutilla",
     "Description": "Pie Frutilla",
-    "Picture": "",
+    "Picture": "postre.png",
+    "Price": 1,
+    "CategoryId": 5
+  },
+  {
+    "Id": 47,
+    "Name": "Pie Frutos rojos",
+    "Description": "Pie Frutos rojos",
+    "Picture": "postre.png",
+    "Price": 1,
+    "CategoryId": 5
+  },
+  {
+    "Id": 48,
+    "Name": "Helado Frutilla",
+    "Description": "Helado Frutilla",
+    "Picture": "postre.png",
+    "Price": 1,
+    "CategoryId": 5
+  },
+  {
+    "Id": 49,
+    "Name": "Helado Chocolate",
+    "Description": "Helado Chocolate",
+    "Picture": "postre.png",
+    "Price": 1,
+    "CategoryId": 5
+  },
+  {
+    "Id": 50,
+    "Name": "Helado Cereza",
+    "Description": "Helado Cereza",
+    "Picture": "postre.png",
+    "Price": 1,
+    "CategoryId": 5
+  },
+  {
+    "Id": 51,
+    "Name": "Helado Limón",
+    "Description": "Helado Limón",
+    "Picture": "postre.png",
     "Price": 1,
     "CategoryId": 5
   }

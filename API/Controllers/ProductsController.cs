@@ -26,7 +26,6 @@ namespace API.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Pagination<ProductDto>))]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiErrorResponse))]
         public async Task<ActionResult<Pagination<ProductDto>>> Get([FromQuery] ProductSpecParams productParams)
         {
             var spec = new ProductPaginationSpecification(productParams);
