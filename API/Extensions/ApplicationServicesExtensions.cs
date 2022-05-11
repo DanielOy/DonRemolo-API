@@ -1,6 +1,7 @@
 ﻿using API.Helpers;
 using Core.Interfaces;
 using Infrastructure.Data;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace API.Extensions
         public static IServiceCollection AddAplicationServices(this IServiceCollection services)
         {
             services.AddHttpContextAccessor();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.Configure<ApiBehaviorOptions>(options =>
