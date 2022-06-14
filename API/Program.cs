@@ -1,5 +1,6 @@
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,6 +26,11 @@ namespace API
                     var context = services.GetRequiredService<StoreContext>();
                     await context.Database.MigrateAsync();
                     await StoreSeedData.SeedInitialData(context, loggerFactory);
+
+                    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+                    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+                    await StoreSeedData.SeedRoles(roleManager, loggerFactory);
+                    await StoreSeedData.SeedUsers(userManager, loggerFactory);
                 }
                 catch (Exception ex)
                 {

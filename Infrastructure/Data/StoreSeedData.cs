@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,62 @@ namespace Infrastructure.Data
 
                     context.Products.AddRange(products);
                     await context.SaveChangesAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<StoreSeedData>();
+                logger.LogError(ex.Message);
+            }
+        }
+
+        public static async Task SeedRoles(RoleManager<IdentityRole> roleManager, ILoggerFactory loggerFactory)
+        {
+            try
+            {
+                if (!roleManager.RoleExistsAsync("Administrator").Result)
+                {
+                    var role = new IdentityRole
+                    {
+                        Name = "Administrator",
+                        NormalizedName = "ADMINISTRATOR"
+                    };
+
+                    await roleManager.CreateAsync(role);
+                }
+
+                if (!roleManager.RoleExistsAsync("User").Result)
+                {
+                    var role = new IdentityRole
+                    {
+                        Name = "Viewer",
+                        NormalizedName = "VIEWER"
+                    };
+
+                    await roleManager.CreateAsync(role);
+                }
+            }
+            catch (Exception ex)
+            {
+                var logger = loggerFactory.CreateLogger<StoreSeedData>();
+                logger.LogError(ex.Message);
+            }
+        }
+
+        public static async Task SeedUsers(UserManager<IdentityUser> userManager, ILoggerFactory loggerFactory)
+        {
+            try
+            {
+                if (userManager.FindByNameAsync("Admin").Result is null)
+                {
+                    var user = new IdentityUser
+                    {
+                        UserName = "Admin",
+                        Email = "admin@gmail.com"
+                    };
+
+                    await userManager.CreateAsync(user, "P@sw0rd*");
+                    await userManager.AddToRoleAsync(user, "Administrator");
                 }
             }
             catch (Exception ex)

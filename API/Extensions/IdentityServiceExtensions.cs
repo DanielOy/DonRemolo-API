@@ -13,6 +13,7 @@ namespace API.Extensions
         public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration config)
         {
             services.AddIdentityCore<IdentityUser>()
+            .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<StoreContext>()
             .AddSignInManager<SignInManager<IdentityUser>>();
 
