@@ -1,8 +1,10 @@
 ﻿using API.Helpers;
+using Core.Entities.Externals;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using System.Net;
@@ -11,7 +13,7 @@ namespace API.Extensions
 {
     public static class ApplicationServicesExtensions
     {
-        public static IServiceCollection AddAplicationServices(this IServiceCollection services)
+        public static IServiceCollection AddAplicationServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddHttpContextAccessor();
             services.AddScoped<ITokenService, TokenService>();
@@ -30,6 +32,13 @@ namespace API.Extensions
                     return new BadRequestObjectResult(errorResponse);
                 };
             });
+
+            var facebookSettings = new FacebookAuthSettings();
+            configuration.Bind(nameof(FacebookAuthSettings),facebookSettings);
+            services.AddSingleton(facebookSettings);
+
+            services.AddHttpClient();
+            services.AddSingleton<IFacebookAuthService, FacebookAuthService>();
 
             return services;
         }

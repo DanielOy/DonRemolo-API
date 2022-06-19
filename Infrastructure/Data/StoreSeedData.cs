@@ -64,8 +64,8 @@ namespace Infrastructure.Data
                 {
                     var role = new IdentityRole
                     {
-                        Name = "Viewer",
-                        NormalizedName = "VIEWER"
+                        Name = "User",
+                        NormalizedName = "USER"
                     };
 
                     await roleManager.CreateAsync(role);

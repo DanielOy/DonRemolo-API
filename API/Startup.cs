@@ -27,7 +27,7 @@ namespace API
             services.AddDbContext<StoreContext>(x =>
                 x.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentityServices(_configuration);
-            services.AddAplicationServices();
+            services.AddAplicationServices(_configuration);
             services.AddSwaggerDocumentation();
 
             services.AddCors(setup => setup.AddPolicy("CorsPolicy", policy =>
