@@ -1,9 +1,11 @@
 ﻿using API.Dtos;
 using API.Helpers;
 using Core.Interfaces;
+using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -17,16 +19,19 @@ namespace API.Controllers
         private readonly ITokenService _tokenService;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly IFacebookAuthService _facebookAuthService;
+        private readonly IConfiguration _configuration;
 
         public AccountController(UserManager<IdentityUser> userManager,
             ITokenService tokenService,
             SignInManager<IdentityUser> signInManager,
-            IFacebookAuthService facebookAuthService)
+            IFacebookAuthService facebookAuthService,
+            IConfiguration configuration)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _signInManager = signInManager;
             _facebookAuthService = facebookAuthService;
+            _configuration = configuration;
         }
 
         [HttpPost("Register")]
@@ -41,25 +46,7 @@ namespace API.Controllers
                 NormalizedUserName = registerDto.Email
             };
 
-            if (EmailExists(user.Email).Result.Value)
-            {
-                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "Email in use"));
-            }
-
-            var creationResult = await _userManager.CreateAsync(user, registerDto.Password);
-            await _userManager.AddToRoleAsync(user, "User");
-
-            if (!creationResult.Succeeded)
-            {
-                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "User can not be created, please retry"));
-            }
-
-            return new UserDto
-            {
-                Email = user.Email,
-                Name = user.NormalizedUserName,
-                Token = _tokenService.CreateToken(user)
-            };
+            return await CreateUser(user, registerDto.Password);
         }
 
         [HttpPost("RegisterWithFacebook")]
@@ -74,7 +61,6 @@ namespace API.Controllers
 
             var userInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
 
-
             var user = new IdentityUser
             {
                 UserName = userInfo.FirstName,
@@ -82,18 +68,42 @@ namespace API.Controllers
                 NormalizedUserName = userInfo.Email
             };
 
+            return await CreateUser(user);
+        }
+
+        [HttpPost("RegisterWithGoogle")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
+        public async Task<ActionResult<UserDto>> RegisterWithGoogle(string accessToken)
+        {
+            var googleUser = await GoogleJsonWebSignature.ValidateAsync(accessToken, new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new[] { _configuration["GoogleAuthSettings:ClientId"] }
+            });
+
+            var user = new IdentityUser
+            {
+                UserName = googleUser.Email,
+                Email = googleUser.Email,
+                NormalizedUserName = googleUser.Email.ToUpper()
+            };
+
+            return await CreateUser(user);
+        }
+
+        private async Task<ActionResult<UserDto>> CreateUser(IdentityUser user, string password = null)
+        {
             if (EmailExists(user.Email).Result.Value)
-            {
                 return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "Email in use"));
-            }
 
-            var creationResult = await _userManager.CreateAsync(user);
-            await _userManager.AddToRoleAsync(user, "User");
+            var creationResult = password is null
+                ? await _userManager.CreateAsync(user)
+                : await _userManager.CreateAsync(user, password);
 
-            if (!creationResult.Succeeded)
-            {
-                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "User can not be created, please retry"));
-            }
+            if (creationResult.Succeeded)
+                await _userManager.AddToRoleAsync(user, "User");
+            else
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, string.Join("; ", creationResult.Errors)));
 
             return new UserDto
             {
@@ -109,23 +119,9 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiErrorResponse))]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userManager.FindByEmailAsync(loginDto.Email);
-
-            if (user == null)
-                return Unauthorized(new ApiErrorResponse(HttpStatusCode.Unauthorized));
-
-            var result = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
-
-            if (!result.Succeeded)
-                return Unauthorized(new ApiErrorResponse(HttpStatusCode.Unauthorized));
-
-            return new UserDto
-            {
-                Email = user.Email,
-                Token = _tokenService.CreateToken(user),
-                Name = user.NormalizedUserName
-            };
+            return await LoginUser(loginDto.Email, loginDto.Password);
         }
+
 
         [HttpPost("LoginWithFacebook")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
@@ -139,10 +135,36 @@ namespace API.Controllers
 
             var userInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
 
-            var user = await _userManager.FindByEmailAsync(userInfo.Email);
+            return await LoginUser(userInfo.Email);
+        }
 
-            if (user is null)
-                return Unauthorized(new ApiErrorResponse(HttpStatusCode.Unauthorized));
+        [HttpPost("LoginWithGoogle")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiErrorResponse))]
+        public async Task<ActionResult<UserDto>> LoginWithGoogle(string accessToken)
+        {
+            var googleUser = await GoogleJsonWebSignature.ValidateAsync(accessToken, new GoogleJsonWebSignature.ValidationSettings()
+            {
+                Audience = new[] { _configuration["GoogleAuthSettings:ClientId"] }
+            });
+
+            return await LoginUser(googleUser.Email);
+        }
+
+        private async Task<ActionResult<UserDto>> LoginUser(string email, string password = null)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+                return Unauthorized(new ApiErrorResponse(HttpStatusCode.Unauthorized, "The user doesn't exist"));
+
+            if (password != null)
+            {
+                var result = await _signInManager.CheckPasswordSignInAsync(user, password, false);
+
+                if (!result.Succeeded)
+                    return Unauthorized(new ApiErrorResponse(HttpStatusCode.Unauthorized, "The user or password isn't valid"));
+            }
 
             return new UserDto
             {
