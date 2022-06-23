@@ -57,6 +57,12 @@ namespace Infrastructure.Data
             _table.Add(entity);
         }
 
+        public void Delete(object Id)
+        {
+            var entity = GetByID(Id);
+            Delete(entity);
+        }
+
         public void Delete(T entityToDelete)
         {
             if (_context.Entry(entityToDelete).State == EntityState.Detached)

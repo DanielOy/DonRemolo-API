@@ -12,6 +12,7 @@ namespace Infrastructure.Data
 
         public IGenericRepository<Product> Products { get; }
         public IGenericRepository<Category> Categories { get; }
+        public IGenericRepository<Promotion> Promotions { get; }
 
         public UnitOfWork(StoreContext context)
         {
@@ -19,6 +20,7 @@ namespace Infrastructure.Data
 
             Products = new GenericRepository<Product>(_context);
             Categories = new GenericRepository<Category>(_context);
+            Promotions = new GenericRepository<Promotion>(_context);
         }
 
         public async Task Save()

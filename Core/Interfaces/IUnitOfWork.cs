@@ -8,6 +8,8 @@ namespace Core.Interfaces
     {
         public IGenericRepository<Product> Products { get; }
         public IGenericRepository<Category> Categories { get; }
+        public IGenericRepository<Promotion> Promotions { get; }
+
         Task Save();
     }
 }

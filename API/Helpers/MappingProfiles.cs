@@ -11,6 +11,9 @@ namespace API.Helpers
             CreateMap<Product, ProductDto>()
                 .ForMember(destiny => destiny.CategoryName, origin => origin.MapFrom(s => s.Category.Name))
                 .ForMember(destiny => destiny.Picture, origin => origin.MapFrom<ProductUrlResolver>());
+
+            CreateMap<Promotion, PromotionDto>()
+                .ReverseMap();
         }
     }
 }

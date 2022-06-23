@@ -37,6 +37,15 @@ namespace Infrastructure.Data
                     context.Products.AddRange(products);
                     await context.SaveChangesAsync();
                 }
+
+                if (!context.Promotions.Any())
+                {
+                    var promotionsData = File.ReadAllText(path + @"/Data/SeedData/promotions.json");
+                    var promotions = JsonSerializer.Deserialize<List<Promotion>>(promotionsData);
+
+                    context.Promotions.AddRange(promotions);
+                    await context.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {
