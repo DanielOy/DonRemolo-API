@@ -25,21 +25,25 @@ namespace API.Controllers
 
         [HttpGet]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Promotion>))]
-        public async Task<ActionResult<IEnumerable<Promotion>>> Get()
+        public async Task<ActionResult<IEnumerable<PromotionViewDto>>> Get()
         {
             var promotions = await _unitOfWork.Promotions
                 .GetAllByExpression(x => x.Id > 0); //TODO: change with a specification with pagination
 
-            return Ok(promotions);
+            var data = _mapper.Map<IEnumerable<Promotion>, IEnumerable<PromotionViewDto>>(promotions);
+
+            return Ok(data);
         }
 
         [HttpGet("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Promotion))]
-        public async Task<ActionResult<Promotion>> Get(int id)
+        public async Task<ActionResult<PromotionViewDto>> Get(int id)
         {
             var promotion = await _unitOfWork.Promotions.GetByID(id);
-            
-            return Ok(promotion);
+
+            var promotionDto = _mapper.Map<Promotion, PromotionViewDto>(promotion);
+
+            return Ok(promotionDto);
         }
 
         [HttpPost]

@@ -1,17 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Core.Entities
+﻿namespace API.Dtos
 {
-    public class Promotion
+    public class PromotionViewDto
     {
         public int Id { get; set; }
-        
-        [Required]
         public string Title { get; set; }
-
         public string Description { get; set; }
-       
-        [Required]
         public decimal PromotionalPrice { get; set; }
         public decimal OriginalPrice { get; set; }
         public string Picture { get; set; }

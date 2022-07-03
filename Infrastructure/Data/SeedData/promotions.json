@@ -3,25 +3,29 @@
     "Id": 1,
     "Title": "Combo para 2",
     "Description": "Pizza mediana X2 + gaseosa de 250ml. X2 + postre X1",
-    "PromotionalPrice": 24.50
+    "PromotionalPrice": 24.50,
+    "Picture": "afe7891d-d617-45fb-8fb1-2c0a0b6ba115.png"
   },
   {
     "Id": 2,
     "Title": "Combo mediano FULL",
     "Description": "Pizza clásica mediana + gaseosa de 250ml. + empanada de atún X1",
-    "PromotionalPrice": 13.80
+    "PromotionalPrice": 13.80,
+    "Picture": "1dddca51-d1d5-47db-945a-4c2f267dc6fd.png"
   },
   {
     "Id": 3,
     "Title": "Para la familia",
     "Description": "Pizza familiar X2 + gaseosa de 1L. + postres X2 + empanada X2",
-    "PromotionalPrice": 38.00
+    "PromotionalPrice": 38.00,
+    "Picture": "3913239b-7ac6-41c0-986f-79d9450b5cc3.png"
   },
   {
     "Id": 4,
     "Title": "2x1 Pizzas familiares",
     "Description": "¡Llévate las 2 pizzas familiares que desees y la segunda es GRATIS!",
     "PromotionalPrice": 17.00,
-    "OriginalPrice": 34.00
+    "OriginalPrice": 34.00,
+    "Picture": "54b531e6-749a-4e35-a140-81437e6262c0.png"
   }
 ]
