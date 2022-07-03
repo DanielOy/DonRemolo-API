@@ -1,8 +1,7 @@
-﻿namespace Core.Entities
+﻿namespace API.Dtos
 {
-    public class Category
+    public class CategoryDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Picture { get; set; }
     }

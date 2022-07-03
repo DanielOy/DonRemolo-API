@@ -24,7 +24,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<Promotion>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PromotionViewDto>))]
         public async Task<ActionResult<IEnumerable<PromotionViewDto>>> Get()
         {
             var promotions = await _unitOfWork.Promotions
@@ -36,7 +36,7 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Promotion))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(PromotionViewDto))]
         public async Task<ActionResult<PromotionViewDto>> Get(int id)
         {
             var promotion = await _unitOfWork.Promotions.GetByID(id);

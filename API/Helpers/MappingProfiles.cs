@@ -17,6 +17,9 @@ namespace API.Helpers
 
             CreateMap<Promotion, PromotionViewDto>()
                 .ForMember(destiny => destiny.Picture, origin => origin.MapFrom<PromotionUrlResolver>());
+        
+            CreateMap<Category,CategoryDto>()
+                .ForMember(destiny => destiny.Picture, origin => origin.MapFrom<CategoryUrlResolver>());
         }
     }
 }

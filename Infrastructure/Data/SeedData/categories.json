@@ -1,22 +1,27 @@
 [
   {
     "Id": 1,
-    "Name": "Pizzas"
+    "Name": "Pizzas",
+    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png"
   },
   {
     "Id": 2,
-    "Name": "Pastas"
+    "Name": "Pastas",
+    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png"
   },
   {
     "Id": 3,
-    "Name": "Empanadas"
+    "Name": "Empanadas",
+    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png"
   },
   {
     "Id": 4,
-    "Name": "Bebidas"
+    "Name": "Bebidas",
+    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png"
   },
   {
     "Id": 5,
-    "Name": "Postres"
+    "Name": "Postres",
+    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png"
   }
 ]
