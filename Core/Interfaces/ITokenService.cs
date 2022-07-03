@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.Threading.Tasks;
+﻿using Core.Entities;
 
 namespace Core.Interfaces
 {
     public interface ITokenService
     {
-        string CreateToken(IdentityUser user);
+        string CreateToken(User user);
     }
 }

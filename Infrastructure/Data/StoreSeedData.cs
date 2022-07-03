@@ -87,14 +87,15 @@ namespace Infrastructure.Data
             }
         }
 
-        public static async Task SeedUsers(UserManager<IdentityUser> userManager, ILoggerFactory loggerFactory)
+        public static async Task SeedUsers(UserManager<User> userManager, ILoggerFactory loggerFactory)
         {
             try
             {
                 if (userManager.FindByNameAsync("Admin").Result is null)
                 {
-                    var user = new IdentityUser
+                    var user = new User
                     {
+                        FullName = "Administrator",
                         UserName = "Admin",
                         Email = "admin@gmail.com"
                     };

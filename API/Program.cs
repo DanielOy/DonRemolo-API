@@ -1,3 +1,4 @@
+using Core.Entities;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -27,7 +28,7 @@ namespace API
                     await context.Database.MigrateAsync();
                     await StoreSeedData.SeedInitialData(context, loggerFactory);
 
-                    var userManager = services.GetRequiredService<UserManager<IdentityUser>>();
+                    var userManager = services.GetRequiredService<UserManager<User>>();
                     var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     await StoreSeedData.SeedRoles(roleManager, loggerFactory);
                     await StoreSeedData.SeedUsers(userManager, loggerFactory);

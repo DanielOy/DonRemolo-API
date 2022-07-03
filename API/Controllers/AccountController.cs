@@ -1,5 +1,6 @@
 ﻿using API.Dtos;
 using API.Helpers;
+using Core.Entities;
 using Core.Interfaces;
 using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http;
@@ -15,15 +16,15 @@ namespace API.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly ITokenService _tokenService;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly IFacebookAuthService _facebookAuthService;
         private readonly IConfiguration _configuration;
 
-        public AccountController(UserManager<IdentityUser> userManager,
+        public AccountController(UserManager<User> userManager,
             ITokenService tokenService,
-            SignInManager<IdentityUser> signInManager,
+            SignInManager<User> signInManager,
             IFacebookAuthService facebookAuthService,
             IConfiguration configuration)
         {
@@ -39,8 +40,9 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
         public async Task<ActionResult<UserDto>> Register(RegisterDto registerDto)
         {
-            var user = new IdentityUser
+            var user = new User
             {
+                FullName = registerDto.FullName,
                 UserName = registerDto.Email,
                 Email = registerDto.Email,
                 NormalizedUserName = registerDto.Email
@@ -61,9 +63,10 @@ namespace API.Controllers
 
             var userInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
 
-            var user = new IdentityUser
+            var user = new User
             {
-                UserName = userInfo.FirstName,
+                FullName = $"{userInfo.FirstName} {userInfo.LastName}",
+                UserName = userInfo.Email,
                 Email = userInfo.Email,
                 NormalizedUserName = userInfo.Email
             };
@@ -81,8 +84,9 @@ namespace API.Controllers
                 Audience = new[] { _configuration["GoogleAuthSettings:ClientId"] }
             });
 
-            var user = new IdentityUser
+            var user = new User
             {
+                FullName = googleUser.Name,
                 UserName = googleUser.Email,
                 Email = googleUser.Email,
                 NormalizedUserName = googleUser.Email.ToUpper()
@@ -91,7 +95,7 @@ namespace API.Controllers
             return await CreateUser(user);
         }
 
-        private async Task<ActionResult<UserDto>> CreateUser(IdentityUser user, string password = null)
+        private async Task<ActionResult<UserDto>> CreateUser(User user, string password = null)
         {
             if (EmailExists(user.Email).Result.Value)
                 return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "Email in use"));
@@ -107,6 +111,7 @@ namespace API.Controllers
 
             return new UserDto
             {
+                FullName = user.FullName,
                 Email = user.Email,
                 Name = user.NormalizedUserName,
                 Token = _tokenService.CreateToken(user)
@@ -168,6 +173,7 @@ namespace API.Controllers
 
             return new UserDto
             {
+                FullName = user.FullName,
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user),
                 Name = user.NormalizedUserName

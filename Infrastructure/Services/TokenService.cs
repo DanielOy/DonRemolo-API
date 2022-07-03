@@ -1,36 +1,35 @@
-﻿using Core.Interfaces;
+﻿using Core.Entities;
+using Core.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace Infrastructure.Services
 {
-    public class TokenService:ITokenService
+    public class TokenService : ITokenService
     {
         private readonly IConfiguration _config;
         private readonly SymmetricSecurityKey _key;
-        private readonly UserManager<IdentityUser> _roleManager;
+        private readonly UserManager<User> _roleManager;
 
-        public TokenService(IConfiguration config, UserManager<IdentityUser> roleManager)
+        public TokenService(IConfiguration config, UserManager<User> roleManager)
         {
             _config = config;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Token:Key"]));
             _roleManager = roleManager;
         }
 
-        public string CreateToken(IdentityUser user)
+        public string CreateToken(User user)
         {
             var claims = new List<Claim>()
             {
                 new Claim(ClaimTypes.Email,user.Email),
-                new Claim(ClaimTypes.GivenName, user.UserName)
+                new Claim(ClaimTypes.GivenName, user.FullName)
             };
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha256Signature);
