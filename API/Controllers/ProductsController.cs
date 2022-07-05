@@ -42,5 +42,18 @@ namespace API.Controllers
 
             return Ok(page);
         }
+
+        [HttpGet("MostPopular")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<ProductDto>))]
+        public async Task<ActionResult<IEnumerable<ProductDto>>> MostPopular()
+        {
+            var spec = new ProductMostPopularSpecification();
+
+            var products = await _unitOfWork.Products.GetAllBySpecification(spec);
+
+            var data = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
+
+            return Ok(data);
+        }
     }
 }

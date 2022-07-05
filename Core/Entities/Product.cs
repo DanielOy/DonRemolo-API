@@ -10,6 +10,7 @@ namespace Core.Entities
         public string Picture { get; set; }
         public decimal Price { get; set; }
         public int CategoryId { get; set; }
+        public bool MostPopular { get; set; }
         public Category Category { get; set; }
     }
 }

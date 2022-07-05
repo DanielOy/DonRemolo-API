@@ -7,6 +7,7 @@
         public string Description { get; set; }
         public string Picture { get; set; }
         public decimal Price { get; set; }
+        public bool MostPopular { get; set; }
         public string CategoryName { get; set; }
     }
 }
