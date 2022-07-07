@@ -18,6 +18,7 @@ namespace API.Extensions
             services.AddHttpContextAccessor();
             services.AddScoped<ITokenService, TokenService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IEmailService, EmailService>();
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -36,6 +37,10 @@ namespace API.Extensions
             var facebookSettings = new FacebookAuthSettings();
             configuration.Bind(nameof(FacebookAuthSettings),facebookSettings);
             services.AddSingleton(facebookSettings);
+
+            var emailSettings = new EmailSettings();
+            configuration.Bind(nameof(EmailSettings),emailSettings);
+            services.AddSingleton(emailSettings);
 
             services.AddHttpClient();
             services.AddSingleton<IFacebookAuthService, FacebookAuthService>();

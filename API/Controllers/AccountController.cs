@@ -6,8 +6,10 @@ using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using System.Net;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -21,18 +23,21 @@ namespace API.Controllers
         private readonly SignInManager<User> _signInManager;
         private readonly IFacebookAuthService _facebookAuthService;
         private readonly IConfiguration _configuration;
+        private readonly IEmailService _emailService;
 
         public AccountController(UserManager<User> userManager,
             ITokenService tokenService,
             SignInManager<User> signInManager,
             IFacebookAuthService facebookAuthService,
-            IConfiguration configuration)
+            IConfiguration configuration,
+            IEmailService emailService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
             _signInManager = signInManager;
             _facebookAuthService = facebookAuthService;
             _configuration = configuration;
+            _emailService = emailService;
         }
 
         [HttpPost("Register")]
@@ -59,7 +64,7 @@ namespace API.Controllers
             var validatedToken = await _facebookAuthService.ValidateAccessTokenAsync(accessToken);
 
             if (!validatedToken.Data.IsValid)
-                return Unauthorized(new ApiErrorResponse(HttpStatusCode.Unauthorized, "Invalid Facebook Token"));
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.Unauthorized, "Invalid Facebook Token"));
 
             var userInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
 
@@ -145,6 +150,7 @@ namespace API.Controllers
 
         [HttpPost("LoginWithGoogle")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiErrorResponse))]
         public async Task<ActionResult<UserDto>> LoginWithGoogle(string accessToken)
         {
@@ -161,7 +167,7 @@ namespace API.Controllers
             var user = await _userManager.FindByEmailAsync(email);
 
             if (user == null)
-                return Unauthorized(new ApiErrorResponse(HttpStatusCode.Unauthorized, "The user doesn't exist"));
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "The user doesn't exist"));
 
             if (password != null)
             {
@@ -180,11 +186,66 @@ namespace API.Controllers
             };
         }
 
-        [HttpGet("EmailExists")]
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
-        public async Task<ActionResult<bool>> EmailExists([FromQuery] string email)
+        private async Task<ActionResult<bool>> EmailExists(string email)
         {
-            return await _userManager.FindByEmailAsync(email) != null;
+            return await EmailExists(new EmailDto { Email = email });
+        }
+
+
+        [HttpPost("EmailExists")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(bool))]
+        public async Task<ActionResult<bool>> EmailExists(EmailDto emailDto)
+        {
+            return await _userManager.FindByEmailAsync(emailDto.Email) != null;
+        }
+
+
+        [HttpPost("RequestResetPassword")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
+
+        public async Task<ActionResult> RequestResetPassword(EmailDto emailDto)
+        {
+            var user = await _userManager.FindByEmailAsync(emailDto.Email);
+
+            if (user is null)
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "The user doesn't exist"));
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var encodedToken = Encoding.UTF8.GetBytes(token);
+            var validToken = WebEncoders.Base64UrlEncode(encodedToken);
+
+            string url = $"{_configuration["ApiUrl"]}ResetPassword?email={emailDto.Email}&token={validToken}";
+
+            bool emailSent = await _emailService.SendEmail(emailDto.Email, "Password Reset Request for DonRemolo",
+                "Your DonRemolo password can be reset by clicking the link below. If you did not request a new password, " +
+                $"please ignore this email.\n\n<a href=\"{url}\">CLICK ME<a>");
+
+            if (emailSent)
+                return Ok("Email sent successful");
+            else
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "The email can't be sent"));
+        }
+
+        [HttpPost("ConfirmResetPassword")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
+        public async Task<ActionResult> ConfirmResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
+
+            if (user is null)
+                return BadRequest();
+
+            var encodedToken = WebEncoders.Base64UrlDecode(resetPasswordDto.Token);
+            var validToken = Encoding.UTF8.GetString(encodedToken);
+
+            var result = await _userManager.ResetPasswordAsync(user, validToken, resetPasswordDto.Password);
+
+            if (result.Succeeded)
+                return Ok("Password reset successful");
+            else
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "The password can't be reset"));
         }
     }
 }
