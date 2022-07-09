@@ -217,9 +217,7 @@ namespace API.Controllers
 
             string url = $"{_configuration["ApiUrl"]}ResetPassword?email={emailDto.Email}&token={validToken}";
 
-            bool emailSent = await _emailService.SendEmail(emailDto.Email, "Password Reset Request for DonRemolo",
-                "Your DonRemolo password can be reset by clicking the link below. If you did not request a new password, " +
-                $"please ignore this email.\n\n<a href=\"{url}\">CLICK ME<a>");
+            bool emailSent = await _emailService.SendRestorePasswordEmail(emailDto.Email, user.FullName, url);
 
             if (emailSent)
                 return Ok("Email sent successful");
