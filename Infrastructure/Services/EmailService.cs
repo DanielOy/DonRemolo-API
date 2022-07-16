@@ -54,12 +54,10 @@ namespace Infrastructure.Services
             }
         }
 
-        public Task<bool> SendRestorePasswordEmail(string email, string fullName, string url)
+        public Task<bool> SendRestorePasswordEmail(string email, string fullName, string code)
         {
-
             try
             {
-                email = "ric.daniel.lpu12@gmail.com";
                 var smtpClient = new SmtpClient(_emailSettings.SmtpServer)
                 {
                     Port = _emailSettings.SmtpPort,
@@ -75,7 +73,7 @@ namespace Infrastructure.Services
                 };
 
                 emailMessage.To.Add(email);
-                emailMessage.AlternateViews.Add(GetResetPasswordEmailBody(fullName, url));
+                emailMessage.AlternateViews.Add(GetResetPasswordEmailBody(fullName, code));
 
                 smtpClient.Send(emailMessage);
 
@@ -87,7 +85,7 @@ namespace Infrastructure.Services
             }
         }
 
-        private AlternateView GetResetPasswordEmailBody(string fullName, string url)
+        private AlternateView GetResetPasswordEmailBody(string fullName, string code)
         {
             var logoStream = new MemoryStream(Resources.logo);
             var Img = new LinkedResource(logoStream, MediaTypeNames.Image.Jpeg)
@@ -95,10 +93,10 @@ namespace Infrastructure.Services
                 ContentId = "LogoImage"
             };
 
-            string emailTemplate = Resources.RestorePassword.Replace("[USER]", fullName).Replace("[URL]", url);
+            string emailTemplate = Resources.RestorePassword.Replace("[USER]", fullName).Replace("[CODE]", code);
             var alternateView = AlternateView.CreateAlternateViewFromString(emailTemplate, null, MediaTypeNames.Text.Html);
             alternateView.LinkedResources.Add(Img);
-            
+
             return alternateView;
         }
     }

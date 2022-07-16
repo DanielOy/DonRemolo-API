@@ -24,13 +24,15 @@ namespace API.Controllers
         private readonly IFacebookAuthService _facebookAuthService;
         private readonly IConfiguration _configuration;
         private readonly IEmailService _emailService;
+        private readonly IAuthService _authService;
 
         public AccountController(UserManager<User> userManager,
             ITokenService tokenService,
             SignInManager<User> signInManager,
             IFacebookAuthService facebookAuthService,
             IConfiguration configuration,
-            IEmailService emailService)
+            IEmailService emailService,
+            IAuthService authService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
@@ -38,6 +40,7 @@ namespace API.Controllers
             _facebookAuthService = facebookAuthService;
             _configuration = configuration;
             _emailService = emailService;
+            _authService = authService;
         }
 
         [HttpPost("Register")]
@@ -199,7 +202,6 @@ namespace API.Controllers
             return await _userManager.FindByEmailAsync(emailDto.Email) != null;
         }
 
-
         [HttpPost("RequestResetPassword")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
@@ -211,13 +213,9 @@ namespace API.Controllers
             if (user is null)
                 return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "The user doesn't exist"));
 
-            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-            var encodedToken = Encoding.UTF8.GetBytes(token);
-            var validToken = WebEncoders.Base64UrlEncode(encodedToken);
+            string code = await _authService.GenerateResetPasswordCode(user);
 
-            string url = $"{_configuration["ApiUrl"]}ResetPassword?email={emailDto.Email}&token={validToken}";
-
-            bool emailSent = await _emailService.SendRestorePasswordEmail(emailDto.Email, user.FullName, url);
+            bool emailSent = await _emailService.SendRestorePasswordEmail(emailDto.Email, user.FullName, code);
 
             if (emailSent)
                 return Ok("Email sent successful");
@@ -225,20 +223,40 @@ namespace API.Controllers
                 return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "The email can't be sent"));
         }
 
-        [HttpPost("ConfirmResetPassword")]
+        [HttpPost("IsResetPasswordCodeValid")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
-        public async Task<ActionResult> ConfirmResetPassword(ResetPasswordDto resetPasswordDto)
+
+        public async Task<ActionResult<bool>> IsResetPasswordCodeValid(VerifyPasswordCodeDto verifyPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(verifyPassword.Email);
+
+            if (user is null)
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "The user doesn't exist"));
+
+            if (_authService.IsResetPasswordCodeValid(verifyPassword.Code, user).Result)
+                return Ok(true);
+            else
+                return Ok(false);
+        }
+
+        [HttpPost("ResetPassword")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
+        public async Task<ActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
         {
             var user = await _userManager.FindByEmailAsync(resetPasswordDto.Email);
 
             if (user is null)
-                return BadRequest();
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "User don't found."));
 
-            var encodedToken = WebEncoders.Base64UrlDecode(resetPasswordDto.Token);
-            var validToken = Encoding.UTF8.GetString(encodedToken);
+            if (!_authService.IsResetPasswordCodeValid(resetPasswordDto.Code, user).Result)
+                return BadRequest(new ApiErrorResponse(HttpStatusCode.BadRequest, "Reset password code incorrect."));
 
-            var result = await _userManager.ResetPasswordAsync(user, validToken, resetPasswordDto.Password);
+            await _authService.DeleteResetPasswordCode(user);
+
+            await _userManager.RemovePasswordAsync(user);
+            var result = await _userManager.AddPasswordAsync(user, resetPasswordDto.Password);
 
             if (result.Succeeded)
                 return Ok("Password reset successful");
