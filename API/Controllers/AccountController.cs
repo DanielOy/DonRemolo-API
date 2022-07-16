@@ -62,14 +62,14 @@ namespace API.Controllers
         [HttpPost("RegisterWithFacebook")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
-        public async Task<ActionResult<UserDto>> RegisterWithFacebook(string accessToken)
+        public async Task<ActionResult<UserDto>> RegisterWithFacebook(ExternalAuthDto authDto)
         {
-            var validatedToken = await _facebookAuthService.ValidateAccessTokenAsync(accessToken);
+            var validatedToken = await _facebookAuthService.ValidateAccessTokenAsync(authDto.Token);
 
             if (!validatedToken.Data.IsValid)
                 return BadRequest(new ApiErrorResponse(HttpStatusCode.Unauthorized, "Invalid Facebook Token"));
 
-            var userInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
+            var userInfo = await _facebookAuthService.GetUserInfoAsync(authDto.Token);
 
             var user = new User
             {
@@ -85,9 +85,9 @@ namespace API.Controllers
         [HttpPost("RegisterWithGoogle")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
-        public async Task<ActionResult<UserDto>> RegisterWithGoogle(string accessToken)
+        public async Task<ActionResult<UserDto>> RegisterWithGoogle(ExternalAuthDto authDto)
         {
-            var googleUser = await GoogleJsonWebSignature.ValidateAsync(accessToken, new GoogleJsonWebSignature.ValidationSettings()
+            var googleUser = await GoogleJsonWebSignature.ValidateAsync(authDto.Token, new GoogleJsonWebSignature.ValidationSettings()
             {
                 Audience = new[] { _configuration["GoogleAuthSettings:ClientId"] }
             });
@@ -139,14 +139,14 @@ namespace API.Controllers
         [HttpPost("LoginWithFacebook")]
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiErrorResponse))]
-        public async Task<ActionResult<UserDto>> LoginWithFacebook(string accessToken)
+        public async Task<ActionResult<UserDto>> LoginWithFacebook(ExternalAuthDto authDto)
         {
-            var validatedToken = await _facebookAuthService.ValidateAccessTokenAsync(accessToken);
+            var validatedToken = await _facebookAuthService.ValidateAccessTokenAsync(authDto.Token);
 
             if (!validatedToken.Data.IsValid)
                 return Unauthorized(new ApiErrorResponse(HttpStatusCode.Unauthorized, "Invalid Facebook Token"));
 
-            var userInfo = await _facebookAuthService.GetUserInfoAsync(accessToken);
+            var userInfo = await _facebookAuthService.GetUserInfoAsync(authDto.Token);
 
             return await LoginUser(userInfo.Email);
         }
@@ -155,9 +155,9 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(UserDto))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(ApiErrorResponse))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(ApiErrorResponse))]
-        public async Task<ActionResult<UserDto>> LoginWithGoogle(string accessToken)
+        public async Task<ActionResult<UserDto>> LoginWithGoogle(ExternalAuthDto authDto)
         {
-            var googleUser = await GoogleJsonWebSignature.ValidateAsync(accessToken, new GoogleJsonWebSignature.ValidationSettings()
+            var googleUser = await GoogleJsonWebSignature.ValidateAsync(authDto.Token, new GoogleJsonWebSignature.ValidationSettings()
             {
                 Audience = new[] { _configuration["GoogleAuthSettings:ClientId"] }
             });
