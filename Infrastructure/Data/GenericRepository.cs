@@ -97,5 +97,10 @@ namespace Infrastructure.Data
         {
             return await ApplySpecification(spec).CountAsync();
         }
+
+        public async Task<IEnumerable<T>> GetAll()
+        {
+            return await _table.ToListAsync();
+        }
     }
 }

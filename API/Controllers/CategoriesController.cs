@@ -29,7 +29,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CategoryDto>))]
         public async Task<ActionResult<IEnumerable<CategoryDto>>> Get()
         {
-            var categories = await _unitOfWork.Categories.GetAllByExpression(x => x.Id > 0); //TODO: Replace with a specification
+            var categories = await _unitOfWork.Categories.GetAll();
 
             var data = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(categories);
 
@@ -41,11 +41,22 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(CategoryDto))]
         public async Task<ActionResult<CategoryDto>> Get(int id)
         {
-            var category = await _unitOfWork.Categories.GetByID(id); 
+            var category = await _unitOfWork.Categories.GetByID(id);
 
             var categoryDto = _mapper.Map<CategoryDto>(category);
 
             return Ok(categoryDto);
+        }
+
+        [HttpGet("HomeCategories")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<CategoryDto>))]
+        public async Task<ActionResult<IEnumerable<CategoryDto>>> GetHomeCategories()
+        {
+            var categories = await _unitOfWork.Categories.GetAllByExpression(x => x.ShowInHome == true);
+
+            var data = _mapper.Map<IEnumerable<Category>, IEnumerable<CategoryDto>>(categories);
+
+            return Ok(data);
         }
     }
 }

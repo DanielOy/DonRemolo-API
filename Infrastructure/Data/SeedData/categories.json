@@ -2,26 +2,31 @@
   {
     "Id": 1,
     "Name": "Pizzas",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png"
+    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
+    "ShowInHome": true
   },
   {
     "Id": 2,
     "Name": "Pastas",
-    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png"
+    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png",
+    "ShowInHome": false
   },
   {
     "Id": 3,
     "Name": "Empanadas",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png"
+    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
+    "ShowInHome": true
   },
   {
     "Id": 4,
     "Name": "Bebidas",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png"
+    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
+    "ShowInHome": false
   },
   {
     "Id": 5,
     "Name": "Postres",
-    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png"
+    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
+    "ShowInHome": true
   }
 ]

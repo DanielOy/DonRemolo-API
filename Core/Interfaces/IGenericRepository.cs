@@ -17,5 +17,6 @@ namespace Core.Interfaces
         void Update(T entityToUpdate);
         void Delete(T entityToDelete);
         void Delete(object Id);
+        Task<IEnumerable<T>> GetAll();
     }
 }
