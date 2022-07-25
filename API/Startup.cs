@@ -25,7 +25,7 @@ namespace API
             services.AddAutoMapper(typeof(MappingProfiles));
             services.AddControllers();
             services.AddDbContext<StoreContext>(x =>
-                x.UseNpgsql(_configuration.GetConnectionString("DefaultConnection")));
+                x.UseSqlite(_configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentityServices(_configuration);
             services.AddAplicationServices(_configuration);
             services.AddSwaggerDocumentation();
