@@ -38,6 +38,33 @@ namespace Infrastructure.Data
                     await context.SaveChangesAsync();
                 }
 
+                if (!context.Doughs.Any())
+                {
+                    var doughData = File.ReadAllText(path + @"/Data/SeedData/doughs.json");
+                    var doughs = JsonSerializer.Deserialize<List<Dough>>(doughData);
+
+                    context.Doughs.AddRange(doughs);
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.Sizes.Any())
+                {
+                    var sizeData = File.ReadAllText(path + @"/Data/SeedData/sizes.json");
+                    var sizes = JsonSerializer.Deserialize<List<Size>>(sizeData);
+
+                    context.Sizes.AddRange(sizes);
+                    await context.SaveChangesAsync();
+                }
+
+                if (!context.Ingredients.Any())
+                {
+                    var ingredientData = File.ReadAllText(path + @"/Data/SeedData/ingredients.json");
+                    var ingredients = JsonSerializer.Deserialize<List<Ingredient>>(ingredientData);
+
+                    context.Ingredients.AddRange(ingredients);
+                    await context.SaveChangesAsync();
+                }
+
                 if (!context.Promotions.Any())
                 {
                     var promotionsData = File.ReadAllText(path + @"/Data/SeedData/promotions.json");

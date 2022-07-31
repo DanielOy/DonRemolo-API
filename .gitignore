@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/API/donremolo.db-wal
+/API/donremolo.db-shm
+/API/donremolo.db

@@ -59,7 +59,7 @@ namespace Infrastructure.Data
 
         public void Delete(object Id)
         {
-            var entity = GetByID(Id);
+            var entity = GetByID(Id).GetAwaiter().GetResult();
             Delete(entity);
         }
 
@@ -101,6 +101,11 @@ namespace Infrastructure.Data
         public async Task<IEnumerable<T>> GetAll()
         {
             return await _table.ToListAsync();
+        }
+
+        public async Task<bool> Exists(Expression<Func<T, bool>> predicate = null)
+        {
+            return await _table.AnyAsync(predicate);
         }
     }
 }

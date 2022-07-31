@@ -1,6 +1,7 @@
 ﻿using API.Dtos;
 using AutoMapper;
 using Core.Entities;
+using System.Linq;
 
 namespace API.Helpers
 {
@@ -17,9 +18,20 @@ namespace API.Helpers
 
             CreateMap<Promotion, PromotionViewDto>()
                 .ForMember(destiny => destiny.Picture, origin => origin.MapFrom<PromotionUrlResolver>());
-        
-            CreateMap<Category,CategoryDto>()
+
+            CreateMap<Category, CategoryDto>()
                 .ForMember(destiny => destiny.Picture, origin => origin.MapFrom<CategoryUrlResolver>());
+
+            CreateMap<Basket, BasketDto>()
+                .ReverseMap();
+
+            CreateMap<BasketProductDto, BasketProduct>();
+
+            CreateMap<BasketProduct, BasketProductDto>()
+                .ForMember(destiny => destiny.Price, origin => origin.MapFrom<PriceResolver>());
+
+            CreateMap<BasketIngredientDto, BasketIngredient>()
+                .ReverseMap();
         }
     }
 }

@@ -27,8 +27,7 @@ namespace API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<PromotionViewDto>))]
         public async Task<ActionResult<IEnumerable<PromotionViewDto>>> Get()
         {
-            var promotions = await _unitOfWork.Promotions
-                .GetAllByExpression(x => x.Id > 0); //TODO: change with a specification with pagination
+            var promotions = await _unitOfWork.Promotions.GetAll();
 
             var data = _mapper.Map<IEnumerable<Promotion>, IEnumerable<PromotionViewDto>>(promotions);
 
@@ -59,7 +58,7 @@ namespace API.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
+        [HttpPut]
         [Authorize(Roles = "Administrator")]
         public async Task<ActionResult> Put([FromBody] Promotion promotion)
         {

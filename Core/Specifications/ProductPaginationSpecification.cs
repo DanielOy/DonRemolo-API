@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Specifications
 {
@@ -32,7 +33,7 @@ namespace Core.Specifications
                 }
             }
 
-            AddInclude(x => x.Category);
+            AddInclude(x => x.Include(x => x.Category));
         }
     }
 }

@@ -1,0 +1,62 @@
+[
+  {
+    "Id": 1,
+    "Name": "Extra Jamón",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 2,
+    "Name": "Extra Pepperoni",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 3,
+    "Name": "Extra Salchicha Italiana",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 4,
+    "Name": "Extra Tocino",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 5,
+    "Name": "Extra Cebolla",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 6,
+    "Name": "Extra Piña",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 7,
+    "Name": "Extra Tomate",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 8,
+    "Name": "Extra Champiñones",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 9,
+    "Name": "Extra Maíz dulce",
+    "Price": 1.50,
+    "CategoryId": 1
+  },
+  {
+    "Id": 10,
+    "Name": "Extra Queso",
+    "Price": 1.50,
+    "CategoryId": 1
+  }
+]

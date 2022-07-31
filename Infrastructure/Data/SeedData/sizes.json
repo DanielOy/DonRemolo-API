@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "Name": "Individual",
+    "Price": 5,
+    "CategoryId": 1
+  },
+  {
+    "Id": 2,
+    "Name": "Mediana",
+    "Price": 12,
+    "CategoryId": 1
+  },
+  {
+    "Id": 3,
+    "Name": "Familiar",
+    "Price": 17,
+    "CategoryId": 1
+  }
+]

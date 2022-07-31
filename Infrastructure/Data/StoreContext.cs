@@ -54,8 +54,14 @@ namespace Infrastructure.Data
             }
         }
 
-        public DbSet<Product> Products { get; set; }
-        public DbSet<Category> Categories { get; set; }
         public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Dough> Doughs { get; set; }
+        public DbSet<Size> Sizes { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Basket> Baskets { get; set; }
+        public DbSet<BasketProduct> BasketProducts { get; set; }
+        public DbSet<BasketIngredient> BasketIngredients { get; set; }
     }
 }

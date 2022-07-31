@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.Specifications
 {
@@ -6,7 +7,7 @@ namespace Core.Specifications
     {
         public ProductMostPopularSpecification() : base(p => p.MostPopular == true)
         {
-            AddInclude(x => x.Category);
+            AddInclude(q => q.Include(x => x.Category));
         }
     }
 }

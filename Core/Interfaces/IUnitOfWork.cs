@@ -9,6 +9,9 @@ namespace Core.Interfaces
         public IGenericRepository<Product> Products { get; }
         public IGenericRepository<Category> Categories { get; }
         public IGenericRepository<Promotion> Promotions { get; }
+        public IGenericRepository<Basket> Baskets { get; }
+        public IGenericRepository<BasketProduct> BasketProducts { get; }
+        public IGenericRepository<BasketIngredient> BasketIngredients { get; }
 
         Task Save();
     }

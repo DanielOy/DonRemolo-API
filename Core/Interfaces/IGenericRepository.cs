@@ -18,5 +18,6 @@ namespace Core.Interfaces
         void Delete(T entityToDelete);
         void Delete(object Id);
         Task<IEnumerable<T>> GetAll();
+        Task<bool> Exists(Expression<Func<T, bool>> predicate = null);
     }
 }
