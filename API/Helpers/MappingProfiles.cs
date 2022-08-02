@@ -13,6 +13,15 @@ namespace API.Helpers
                 .ForMember(destiny => destiny.CategoryName, origin => origin.MapFrom(s => s.Category.Name))
                 .ForMember(destiny => destiny.Picture, origin => origin.MapFrom<ProductUrlResolver>());
 
+            CreateMap<Ingredient, IngredientDto>()
+                .ReverseMap();
+
+            CreateMap<Dough, DoughDto>()
+                .ReverseMap();
+
+            CreateMap<Size, SizeDto>()
+                .ReverseMap();
+
             CreateMap<Promotion, PromotionDto>()
                 .ReverseMap();
 

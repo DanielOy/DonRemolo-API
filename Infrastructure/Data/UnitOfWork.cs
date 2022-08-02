@@ -11,6 +11,9 @@ namespace Infrastructure.Data
         private bool disposed = false;
 
         public IGenericRepository<Product> Products { get; }
+        public IGenericRepository<Ingredient> Ingredients { get; }
+        public IGenericRepository<Dough> Doughs { get; }
+        public IGenericRepository<Size> Sizes { get; }
         public IGenericRepository<Category> Categories { get; }
         public IGenericRepository<Promotion> Promotions { get; }
         public IGenericRepository<Basket> Baskets { get; set; }
@@ -22,6 +25,9 @@ namespace Infrastructure.Data
             _context = context;
 
             Products = new GenericRepository<Product>(_context);
+            Ingredients = new GenericRepository<Ingredient>(_context);
+            Doughs = new GenericRepository<Dough>(_context);
+            Sizes = new GenericRepository<Size>(_context);
             Categories = new GenericRepository<Category>(_context);
             Promotions = new GenericRepository<Promotion>(_context);
             Baskets = new GenericRepository<Basket>(_context);
