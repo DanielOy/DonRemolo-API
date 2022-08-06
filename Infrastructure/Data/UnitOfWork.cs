@@ -20,6 +20,10 @@ namespace Infrastructure.Data
         public IGenericRepository<BasketProduct> BasketProducts { get; set; }
         public IGenericRepository<BasketIngredient> BasketIngredients { get; set; }
 
+        public IGenericRepository<Order> Orders { get; set; }
+        public IGenericRepository<OrderProduct> OrderProducts { get; set; }
+        public IGenericRepository<OrderIngredient> OrderIngredients { get; set; }
+
         public UnitOfWork(StoreContext context)
         {
             _context = context;
@@ -33,6 +37,9 @@ namespace Infrastructure.Data
             Baskets = new GenericRepository<Basket>(_context);
             BasketProducts = new GenericRepository<BasketProduct>(_context);
             BasketIngredients = new GenericRepository<BasketIngredient>(_context);
+            Orders = new GenericRepository<Order>(_context);
+            OrderProducts = new GenericRepository<OrderProduct>(_context);
+            OrderIngredients = new GenericRepository<OrderIngredient>(_context);
         }
 
         public async Task Save()

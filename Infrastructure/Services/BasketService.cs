@@ -1,4 +1,5 @@
-﻿using Core.Entities;
+﻿using AutoMapper;
+using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using Infrastructure.Data;
@@ -10,34 +11,36 @@ namespace Infrastructure.Services
     public class BasketService : IBasketService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public BasketService(IUnitOfWork unitOfWork, StoreContext context)
+        public BasketService(IUnitOfWork unitOfWork, StoreContext context, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
-        public async Task<Basket> GetOrderByUserId(string userId)
+        public async Task<Basket> GetBasketByUserId(string userId)
         {
             var spec = new UserOrderWithProducts(userId);
 
             return await _unitOfWork.Baskets.GetBySpecification(spec);
         }
 
-        public async Task<Basket> GetOrderById(Guid id)
+        public async Task<Basket> GetBasketById(Guid id)
         {
             var spec = new BasketWithProductsSpec(id);
 
             return await _unitOfWork.Baskets.GetBySpecification(spec);
         }
 
-        public async Task DeleteOrder(Guid id)
+        public async Task DeleteBasket(Guid id)
         {
             _unitOfWork.Baskets.Delete(id);
 
             await _unitOfWork.Save();
         }
 
-        public async Task<Basket> UpdateOrder(Basket basket)
+        public async Task<Basket> UpdateBasket(Basket basket)
         {
             bool orderExists = await _unitOfWork.Baskets.Exists(o => o.Id == basket.Id);
 
@@ -72,6 +75,24 @@ namespace Infrastructure.Services
             var ingredients = await _unitOfWork.BasketIngredients.GetAllByExpression(x => x.BasketId == basket.Id);
             foreach (var ingredient in ingredients)
                 _unitOfWork.BasketIngredients.Delete(ingredient);
+        }
+
+        public async Task<string> ConfirmBasket(Guid basketId)
+        {
+            var basket = await GetBasketById(basketId);
+            var orderId = Guid.NewGuid();
+
+            if (basket is null)
+                return String.Empty;
+
+            var order = _mapper.Map<Order>(basket);
+            order.Status = Order.OrderStatus.Ordered;
+            order.Id = orderId;
+
+            _unitOfWork.Orders.Insert(order);
+            await DeleteBasket(basketId);
+
+            return orderId.ToString();
         }
     }
 }

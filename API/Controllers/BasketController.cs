@@ -34,7 +34,7 @@ namespace API.Controllers
         {
             string userId = await User.GetCurrentUserId(_userManager);
 
-            var order = await _basketService.GetOrderByUserId(userId);
+            var order = await _basketService.GetBasketByUserId(userId);
 
             if (order is null)
                 return Ok(await CreateUserBasket(userId));
@@ -64,7 +64,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<BasketDto>> GetBasketById(string id)
         {
-            var order = await _basketService.GetOrderById(new Guid(id));
+            var order = await _basketService.GetBasketById(new Guid(id));
 
             if (order is null)
                 return Ok(new BasketDto(id));
@@ -83,7 +83,7 @@ namespace API.Controllers
 
             var order = _mapper.Map<BasketDto, Basket>(basket);
 
-            var updatedOrder = await _basketService.UpdateOrder(order);
+            var updatedOrder = await _basketService.UpdateBasket(order);
 
             basket = _mapper.Map<BasketDto>(updatedOrder);
 
@@ -105,7 +105,7 @@ namespace API.Controllers
         public async Task<ActionResult> DeleteBasket(string id)
         {
             var guid = new Guid(id);
-            var basket = await _basketService.GetOrderById(guid);
+            var basket = await _basketService.GetBasketById(guid);
 
             if (!CurrentUserCanUseBasket(basket).Result)
             {
@@ -113,7 +113,7 @@ namespace API.Controllers
                     new ApiErrorResponse(HttpStatusCode.Unauthorized, "User can't delete this basket"));
             }
 
-            await _basketService.DeleteOrder(guid);
+            await _basketService.DeleteBasket(guid);
             return Ok();
         }
 
@@ -122,6 +122,17 @@ namespace API.Controllers
             var basket = _mapper.Map<BasketDto>(order);
 
             return await CurrentUserCanUseBasket(basket);
+        }
+
+        [HttpPost("OrderBasket")]
+        public async Task<ActionResult<string>> ConfirmBasket(string basketId)
+        {
+            string orderId = await _basketService.ConfirmBasket(new Guid(basketId));
+
+            if (orderId == string.Empty)
+                return NotFound();
+
+            return Ok(orderId);
         }
     }
 }

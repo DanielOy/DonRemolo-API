@@ -60,8 +60,13 @@ namespace Infrastructure.Data
         public DbSet<Dough> Doughs { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+       
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketProduct> BasketProducts { get; set; }
         public DbSet<BasketIngredient> BasketIngredients { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<OrderIngredient> OrderIngredients { get; set; }
     }
 }
