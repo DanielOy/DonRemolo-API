@@ -45,6 +45,10 @@ namespace API.Helpers
             CreateMap<Basket, Order>().ReverseMap();
             CreateMap<BasketProduct, OrderProduct>().ReverseMap();
             CreateMap<BasketIngredient, OrderIngredient>().ReverseMap();
+
+            CreateMap<Order, OrderDto>();
+            CreateMap<OrderProduct, OrderProductDto>();
+            CreateMap<OrderIngredient, OrderIngredientDto>();
         }
     }
 }
