@@ -7,5 +7,6 @@ namespace Core.Entities
         public string FullName { get; set; }
         public string ResetPasswordCode { get; set; }
         public string Address { get; set; }
+        public string ProfilePictureUrl { get; set; }
     }
 }

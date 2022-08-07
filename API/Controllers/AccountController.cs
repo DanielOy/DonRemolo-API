@@ -76,7 +76,8 @@ namespace API.Controllers
                 FullName = $"{userInfo.FirstName} {userInfo.LastName}",
                 UserName = userInfo.Email,
                 Email = userInfo.Email,
-                NormalizedUserName = userInfo.Email
+                NormalizedUserName = userInfo.Email,
+                ProfilePictureUrl = userInfo.Picture.Data.Url.ToString()
             };
 
             return await CreateUser(user);
@@ -97,6 +98,7 @@ namespace API.Controllers
                 FullName = googleUser.Name,
                 UserName = googleUser.Email,
                 Email = googleUser.Email,
+                ProfilePictureUrl = googleUser.Picture,
                 NormalizedUserName = googleUser.Email.ToUpper()
             };
 
@@ -122,7 +124,8 @@ namespace API.Controllers
                 FullName = user.FullName,
                 Email = user.Email,
                 Name = user.NormalizedUserName,
-                Token = _tokenService.CreateToken(user)
+                Token = _tokenService.CreateToken(user),
+                PictureUrl = user.ProfilePictureUrl
             };
         }
 
@@ -185,7 +188,8 @@ namespace API.Controllers
                 FullName = user.FullName,
                 Email = user.Email,
                 Token = _tokenService.CreateToken(user),
-                Name = user.NormalizedUserName
+                Name = user.NormalizedUserName,
+                PictureUrl = user.ProfilePictureUrl
             };
         }
 
