@@ -3,7 +3,6 @@ using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -45,12 +44,24 @@ namespace API.Controllers
             var spec = new OrderWithProductsSpec(new Guid(id));
 
             var order = await _unitOfWork.Orders.GetBySpecification(spec);
+            order = await SimulateProcess(order); //TODO: Remove, only for development purposes
 
             var orderDto = _mapper.Map<Order, OrderDto>(order);
 
             return Ok(orderDto);
         }
 
+        private async Task<Order> SimulateProcess(Order order)
+        {
+            if (order.Status != Order.OrderStatus.Delivered)
+            {
+                order.Status += 1;
+                _unitOfWork.Orders.Update(order);
+                await _unitOfWork.Save();
+            }
+
+            return order;
+        }
 
         [HttpPut("UpdateOrderStatus")]
         //[Authorize(Roles = "Administrator")] //TODO: Implement roles
