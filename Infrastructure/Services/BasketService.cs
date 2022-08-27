@@ -96,6 +96,7 @@ namespace Infrastructure.Services
             var order = _mapper.Map<Order>(basket);
             order.Status = Order.OrderStatus.Ordered;
             order.Id = orderId;
+            order.Total = order.Products.Sum(x => x.Price * x.Quantity);
 
             _unitOfWork.Orders.Insert(order);
             await DeleteBasket(basketId);

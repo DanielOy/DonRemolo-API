@@ -28,6 +28,5 @@ namespace API.Dtos.Basket
         public decimal Total => Products?.Sum(x => x.SubTotal) ?? 0.0m;
 
         public List<GetBasketProductDto> Products { get; set; }
-        //public List<GetBasketProductDto> Promotions { get; set; }
     }
 }

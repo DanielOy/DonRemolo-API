@@ -2,6 +2,7 @@
 using API.Dtos.Basket;
 using AutoMapper;
 using Core.Entities;
+using System.Linq;
 
 namespace API.Helpers
 {
@@ -49,8 +50,11 @@ namespace API.Helpers
             CreateMap<SaveBasketProductDto, BasketProduct>().ReverseMap();
             CreateMap<SaveBasketIngredientDto, BasketIngredient>().ReverseMap();
 
-            CreateMap<Basket, Order>().ReverseMap();
-            CreateMap<BasketProduct, OrderProduct>().ReverseMap();
+            CreateMap<BasketProduct, OrderProduct>()
+                .ForMember(destiny => destiny.Price, origin => origin.MapFrom<BasketProductPriceResolver>());
+
+            CreateMap<Order, Basket>().ReverseMap();
+            CreateMap<OrderProduct, BasketProduct>();
             CreateMap<BasketIngredient, OrderIngredient>().ReverseMap();
 
             CreateMap<Order, OrderDto>();

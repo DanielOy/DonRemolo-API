@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Core.Entities
 {
@@ -17,7 +18,7 @@ namespace Core.Entities
         public DateTime DeliveryTime { get; set; }
         public bool IsCashPayment { get; set; }
         public decimal Cash { get; set; }
-
+        public decimal Total { get; set; }
         public OrderStatus Status { get; set; }
 
         public List<OrderProduct> Products { get; set; }

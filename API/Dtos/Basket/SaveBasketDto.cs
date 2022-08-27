@@ -20,6 +20,5 @@ namespace API.Dtos.Basket
         public decimal? Cash { get; set; }
 
         public List<SaveBasketProductDto> Products { get; set; }
-        //public List<GetBasketProductDto> Promotions { get; set; }
     }
 }
