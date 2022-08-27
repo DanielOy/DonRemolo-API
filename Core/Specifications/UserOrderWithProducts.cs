@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Core.Specifications
 {
-    public class UserOrderWithProducts:BaseSpecification<Basket>
+    public class UserOrderWithProducts : BaseSpecification<Basket>
     {
         public UserOrderWithProducts(string userId) : base(x => x.UserId == userId)
         {

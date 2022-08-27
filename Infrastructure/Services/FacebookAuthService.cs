@@ -1,11 +1,7 @@
 ﻿using Core.Entities.Externals;
 using Core.Interfaces;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Services
@@ -35,7 +31,7 @@ namespace Infrastructure.Services
 
         public async Task<FacebookUserInfoResult> GetUserInfoAsync(string accessToken)
         {
-            var formattedUrl = string.Format(UserInfoUrl,accessToken);
+            var formattedUrl = string.Format(UserInfoUrl, accessToken);
             var result = await _httpClientFactory.CreateClient().GetAsync(formattedUrl);
             result.EnsureSuccessStatusCode();
 

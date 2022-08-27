@@ -1,5 +1,4 @@
 ﻿using Core.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
 namespace Infrastructure.Data

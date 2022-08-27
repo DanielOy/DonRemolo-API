@@ -2,8 +2,10 @@
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
+using Core.Validators;
 using Infrastructure.Data;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Services
@@ -56,7 +58,13 @@ namespace Infrastructure.Services
             else
             {
                 basket.CreationDate = DateTime.Now;
-                _unitOfWork.Baskets.Insert(basket);
+
+                var validator = new BasketValidator(_unitOfWork);
+                var validationResult = await validator.ValidateAsync(basket);
+                if (validationResult.IsValid)
+                    _unitOfWork.Baskets.Insert(basket);
+                else
+                    throw new Exception(string.Join('\n', validationResult.Errors.Select(x => x.ErrorMessage)));
             }
 
             await _unitOfWork.Save();

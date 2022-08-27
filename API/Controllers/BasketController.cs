@@ -1,4 +1,4 @@
-﻿using API.Dtos;
+﻿using API.Dtos.Basket;
 using API.Extensions;
 using API.Helpers;
 using AutoMapper;
@@ -30,25 +30,25 @@ namespace API.Controllers
 
         [HttpGet("GetUserBasket")]
         [Authorize]
-        public async Task<ActionResult<BasketDto>> GetUserBasket()
+        public async Task<ActionResult<GetBasketDto>> GetUserBasket()
         {
             string userId = await User.GetCurrentUserId(_userManager);
 
-            var order = await _basketService.GetBasketByUserId(userId);
+            var basket = await _basketService.GetBasketByUserId(userId);
 
-            if (order is null)
+            if (basket is null)
                 return Ok(await CreateUserBasket(userId));
 
-            var basket = _mapper.Map<BasketDto>(order);
+            var basketDto = _mapper.Map<GetBasketDto>(basket);
 
-            return Ok(basket);
+            return Ok(basketDto);
         }
 
-        private async Task<BasketDto> CreateUserBasket(string userId)
+        private async Task<GetBasketDto> CreateUserBasket(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
 
-            var basket = new BasketDto
+            var basket = new GetBasketDto
             {
                 Id = Guid.NewGuid().ToString(),
                 UserId = userId,
@@ -62,35 +62,35 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BasketDto>> GetBasketById(string id)
+        public async Task<ActionResult<GetBasketDto>> GetBasketById(string id)
         {
             var order = await _basketService.GetBasketById(new Guid(id));
 
             if (order is null)
-                return Ok(new BasketDto(id));
+                return Ok(new GetBasketDto(id));
 
-            var basket = _mapper.Map<BasketDto>(order);
+            var basket = _mapper.Map<GetBasketDto>(order);
 
             return Ok(basket);
         }
 
         [HttpPut]
-        public async Task<ActionResult<BasketDto>> UpdateBasket(BasketDto basket)
+        public async Task<ActionResult<GetBasketDto>> UpdateBasket(SaveBasketDto saveBasket)
         {
-            if (!CurrentUserCanUseBasket(basket).Result)
+            if (!CurrentUserCanUseBasket(saveBasket).Result)
                 return Unauthorized(
                     new ApiErrorResponse(HttpStatusCode.Unauthorized, "User can't update this basket"));
 
-            var order = _mapper.Map<BasketDto, Basket>(basket);
+            var basket = _mapper.Map<Basket>(saveBasket);
 
-            var updatedOrder = await _basketService.UpdateBasket(order);
+            var updatedOrder = await _basketService.UpdateBasket(basket);
 
-            basket = _mapper.Map<BasketDto>(updatedOrder);
+            var getBasket = _mapper.Map<GetBasketDto>(updatedOrder);
 
-            return Ok(basket);
+            return Ok(getBasket);
         }
 
-        private async Task<bool> CurrentUserCanUseBasket(BasketDto basket)
+        private async Task<bool> CurrentUserCanUseBasket(SaveBasketDto basket)
         {
             if (!string.IsNullOrEmpty(basket.UserId))
             {
@@ -117,11 +117,11 @@ namespace API.Controllers
             return Ok();
         }
 
-        private async Task<bool> CurrentUserCanUseBasket(Basket order)
+        private async Task<bool> CurrentUserCanUseBasket(Basket basket)
         {
-            var basket = _mapper.Map<BasketDto>(order);
+            var basketDto = _mapper.Map<SaveBasketDto>(basket);
 
-            return await CurrentUserCanUseBasket(basket);
+            return await CurrentUserCanUseBasket(basketDto);
         }
 
         [HttpPost("OrderBasket")]

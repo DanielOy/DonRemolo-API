@@ -37,11 +37,11 @@ namespace API.Extensions
             });
 
             var facebookSettings = new FacebookAuthSettings();
-            configuration.Bind(nameof(FacebookAuthSettings),facebookSettings);
+            configuration.Bind(nameof(FacebookAuthSettings), facebookSettings);
             services.AddSingleton(facebookSettings);
 
             var emailSettings = new EmailSettings();
-            configuration.Bind(nameof(EmailSettings),emailSettings);
+            configuration.Bind(nameof(EmailSettings), emailSettings);
             services.AddSingleton(emailSettings);
 
             services.AddHttpClient();

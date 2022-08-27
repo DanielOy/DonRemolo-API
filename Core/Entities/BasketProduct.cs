@@ -9,8 +9,6 @@ namespace Core.Entities
         public Guid BasketId { get; set; }
         public int? ProductId { get; set; }
         public Product Product { get; set; }
-        public int? PromotionId { get; set; }
-        public Promotion Promotion { get; set; }
         public int Quantity { get; set; }
         public int? DoughId { get; set; }
         public Dough Dough { get; set; }

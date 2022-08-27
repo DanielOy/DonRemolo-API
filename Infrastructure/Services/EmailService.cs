@@ -1,15 +1,10 @@
 ﻿using Core.Entities.Externals;
 using Core.Interfaces;
 using Infrastructure.Properties;
-using Microsoft.AspNetCore.Hosting.Server;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Net.Mime;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Services

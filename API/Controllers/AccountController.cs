@@ -6,10 +6,8 @@ using Google.Apis.Auth;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Configuration;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace API.Controllers

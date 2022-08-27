@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace API.Dtos
+namespace API.Dtos.Basket
 {
-    public class BasketDto
+    public class GetBasketDto
     {
-        public BasketDto()
+        public GetBasketDto()
         { }
-        public BasketDto(string id)
+        public GetBasketDto(string id)
         {
             Id = id;
         }
@@ -27,6 +27,7 @@ namespace API.Dtos
 
         public decimal Total => Products?.Sum(x => x.SubTotal) ?? 0.0m;
 
-        public List<BasketProductDto> Products { get; set; }
+        public List<GetBasketProductDto> Products { get; set; }
+        //public List<GetBasketProductDto> Promotions { get; set; }
     }
 }
