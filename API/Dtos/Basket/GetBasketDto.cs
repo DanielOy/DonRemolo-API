@@ -25,8 +25,9 @@ namespace API.Dtos.Basket
         public bool IsCashPayment { get; set; }
         public decimal Cash { get; set; }
 
-        public decimal Total => Products?.Sum(x => x.SubTotal) ?? 0.0m;
+        public decimal Total => (Products?.Sum(x => x.SubTotal) ?? 0.0m) + (Promotions?.Sum(x => x.SubTotal) ?? 0.0m);
 
         public List<GetBasketProductDto> Products { get; set; }
+        public List<GetBasketPromotionDto> Promotions { get; set; }
     }
 }

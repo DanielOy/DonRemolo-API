@@ -2,7 +2,6 @@
 using API.Dtos.Basket;
 using AutoMapper;
 using Core.Entities;
-using System.Linq;
 
 namespace API.Helpers
 {
@@ -46,20 +45,43 @@ namespace API.Helpers
                 .ForMember(destiny => destiny.IngredientName, origin => origin.MapFrom(s => s.Ingredient.Name))
                 .ForMember(destiny => destiny.IngredientPrice, origin => origin.MapFrom(s => s.Ingredient.Price));
 
+            CreateMap<BasketPromotion, GetBasketPromotionDto>()
+                .ForMember(destiny => destiny.PromotionName, origin => origin.MapFrom(s => s.Promotion.Title))
+                .ForMember(destiny => destiny.Price, origin => origin.MapFrom(s => s.Promotion.PromotionalPrice));
+
+            CreateMap<BasketPromotionItem, GetBasketPromotionItemDto>()
+                .ForMember(destiny => destiny.ProductName, origin => origin.MapFrom(s => s.Product.Name));
+
             CreateMap<SaveBasketDto, Basket>().ReverseMap();
             CreateMap<SaveBasketProductDto, BasketProduct>().ReverseMap();
             CreateMap<SaveBasketIngredientDto, BasketIngredient>().ReverseMap();
+            CreateMap<SaveBasketPromotionDto, BasketPromotion>().ReverseMap();
+            CreateMap<SaveBasketPromotionItemDto, BasketPromotionItem>().ReverseMap();
 
             CreateMap<BasketProduct, OrderProduct>()
                 .ForMember(destiny => destiny.Price, origin => origin.MapFrom<BasketProductPriceResolver>());
 
+            CreateMap<BasketPromotion, OrderPromotion>()
+                .ForMember(destiny => destiny.Price, origin => origin.MapFrom(s => s.Promotion.PromotionalPrice));
+
             CreateMap<Order, Basket>().ReverseMap();
             CreateMap<OrderProduct, BasketProduct>();
-            CreateMap<BasketIngredient, OrderIngredient>().ReverseMap();
+            CreateMap<OrderIngredient, BasketIngredient>().ReverseMap();
+            CreateMap<OrderPromotion, BasketPromotion>().ReverseMap();
+            CreateMap<OrderPromotionItem, BasketPromotionItem>().ReverseMap();
 
             CreateMap<Order, OrderDto>();
-            CreateMap<OrderProduct, OrderProductDto>();
-            CreateMap<OrderIngredient, OrderIngredientDto>();
+            CreateMap<OrderProduct, OrderProductDto>()
+                .ForMember(destiny => destiny.ProductName, origin => origin.MapFrom(s => s.Product.Name));
+
+            CreateMap<OrderIngredient, OrderIngredientDto>()
+                .ForMember(destiny => destiny.IngredientName, origin => origin.MapFrom(s => s.Ingredient.Name));
+
+            CreateMap<OrderPromotion, OrderPromotionDto>()
+                .ForMember(destiny => destiny.PromotionName, origin => origin.MapFrom(s => s.Promotion.Title));
+
+            CreateMap<OrderPromotionItem, OrderPromotionItemDto>()
+                .ForMember(destiny => destiny.ProductName, origin => origin.MapFrom(s => s.Product.Name));
         }
     }
 }

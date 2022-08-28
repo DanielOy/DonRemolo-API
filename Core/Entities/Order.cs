@@ -22,6 +22,7 @@ namespace Core.Entities
         public OrderStatus Status { get; set; }
 
         public List<OrderProduct> Products { get; set; }
+        public List<OrderPromotion> Promotions { get; set; }
 
         public enum OrderStatus
         {

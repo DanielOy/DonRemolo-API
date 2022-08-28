@@ -55,6 +55,7 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Promotion> Promotions { get; set; }
+        public DbSet<PromotionItem> PromotionItems { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Dough> Doughs { get; set; }
@@ -64,9 +65,13 @@ namespace Infrastructure.Data
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketProduct> BasketProducts { get; set; }
         public DbSet<BasketIngredient> BasketIngredients { get; set; }
+        public DbSet<BasketPromotion> basketPromotions { get; set; }
+        public DbSet<BasketPromotionItem> basketPromotionItems { get; set; }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
         public DbSet<OrderIngredient> OrderIngredients { get; set; }
+        public DbSet<OrderPromotion> OrderPromotions { get; set; }
+        public DbSet<OrderPromotionItem> OrderPromotionItems { get; set; }
     }
 }

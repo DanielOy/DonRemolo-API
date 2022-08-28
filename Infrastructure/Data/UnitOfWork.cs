@@ -16,13 +16,18 @@ namespace Infrastructure.Data
         public IGenericRepository<Size> Sizes { get; }
         public IGenericRepository<Category> Categories { get; }
         public IGenericRepository<Promotion> Promotions { get; }
+        public IGenericRepository<PromotionItem> PromotionItems { get; set; }
         public IGenericRepository<Basket> Baskets { get; set; }
         public IGenericRepository<BasketProduct> BasketProducts { get; set; }
         public IGenericRepository<BasketIngredient> BasketIngredients { get; set; }
+        public IGenericRepository<BasketPromotion> BasketPromotions { get; set; }
+        public IGenericRepository<BasketPromotionItem> BasketPromotionItems { get; set; }
 
         public IGenericRepository<Order> Orders { get; set; }
         public IGenericRepository<OrderProduct> OrderProducts { get; set; }
         public IGenericRepository<OrderIngredient> OrderIngredients { get; set; }
+        public IGenericRepository<OrderPromotion> OrderPromotions { get; set; }
+        public IGenericRepository<OrderPromotionItem> OrderPromotionItems { get; set; }
 
         public UnitOfWork(StoreContext context)
         {
@@ -34,12 +39,19 @@ namespace Infrastructure.Data
             Sizes = new GenericRepository<Size>(_context);
             Categories = new GenericRepository<Category>(_context);
             Promotions = new GenericRepository<Promotion>(_context);
+            PromotionItems = new GenericRepository<PromotionItem>(_context);
+
             Baskets = new GenericRepository<Basket>(_context);
             BasketProducts = new GenericRepository<BasketProduct>(_context);
             BasketIngredients = new GenericRepository<BasketIngredient>(_context);
+            BasketPromotions = new GenericRepository<BasketPromotion>(_context);
+            BasketPromotionItems = new GenericRepository<BasketPromotionItem>(_context);
+
             Orders = new GenericRepository<Order>(_context);
             OrderProducts = new GenericRepository<OrderProduct>(_context);
             OrderIngredients = new GenericRepository<OrderIngredient>(_context);
+            OrderPromotions = new GenericRepository<OrderPromotion>(_context);
+            OrderPromotionItems = new GenericRepository<OrderPromotionItem>(_context);
         }
 
         public async Task Save()

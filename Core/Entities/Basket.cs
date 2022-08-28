@@ -19,5 +19,6 @@ namespace Core.Entities
         public decimal Cash { get; set; }
 
         public List<BasketProduct> Products { get; set; }
+        public List<BasketPromotion> Promotions { get; set; }
     }
 }

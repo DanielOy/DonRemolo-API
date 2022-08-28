@@ -48,8 +48,10 @@ namespace Infrastructure.Services
 
             await DeleteOldData(basket);
 
-            basket.Products.ForEach(p => p.BasketId = basket.Id);
-            basket.Products.ForEach(p => p.Ingredients.ForEach(i => i.BasketId = basket.Id));
+            basket.Products?.ForEach(p => p.BasketId = basket.Id);
+            basket.Products?.ForEach(p => p.Ingredients?.ForEach(i => i.BasketId = basket.Id));
+            basket.Promotions?.ForEach(p => p.BasketId = basket.Id);
+            basket.Promotions?.ForEach(p => p.Items?.ForEach(i => i.BasketId = basket.Id));
 
             if (orderExists)
             {
@@ -83,6 +85,14 @@ namespace Infrastructure.Services
             var ingredients = await _unitOfWork.BasketIngredients.GetAllByExpression(x => x.BasketId == basket.Id);
             foreach (var ingredient in ingredients)
                 _unitOfWork.BasketIngredients.Delete(ingredient);
+
+            var promotions = await _unitOfWork.BasketPromotions.GetAllByExpression(x => x.BasketId == basket.Id);
+            foreach (var promotion in promotions)
+                _unitOfWork.BasketPromotions.Delete(promotion);
+
+            var promotionItems = await _unitOfWork.BasketPromotionItems.GetAllByExpression(x => x.BasketId == basket.Id);
+            foreach (var promotionItem in promotionItems)
+                _unitOfWork.BasketPromotionItems.Delete(promotionItem);
         }
 
         public async Task<string> ConfirmBasket(Guid basketId)
@@ -96,7 +106,8 @@ namespace Infrastructure.Services
             var order = _mapper.Map<Order>(basket);
             order.Status = Order.OrderStatus.Ordered;
             order.Id = orderId;
-            order.Total = order.Products.Sum(x => x.Price * x.Quantity);
+            order.Total = (order.Products?.Sum(x => x.Price * x.Quantity) ?? 0)
+                + (order.Promotions?.Sum(x => x.Price * x.Quantity) ?? 0);
 
             _unitOfWork.Orders.Insert(order);
             await DeleteBasket(basketId);

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Core.Entities
 {
@@ -15,5 +16,7 @@ namespace Core.Entities
         public decimal PromotionalPrice { get; set; }
         public decimal OriginalPrice { get; set; }
         public string Picture { get; set; }
+
+        public List<PromotionItem> Items { get; set; }
     }
 }

@@ -22,5 +22,6 @@ namespace API.Dtos
         public OrderStatus Status { get; set; }
 
         public List<OrderProductDto> Products { get; set; }
+        public List<OrderPromotionDto> Promotions { get; set; }
     }
 }
