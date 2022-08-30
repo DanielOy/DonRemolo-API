@@ -1,6 +1,7 @@
 ﻿using API.Dtos;
 using API.Dtos.Basket;
 using AutoMapper;
+using Core.Constants;
 using Core.Entities;
 
 namespace API.Helpers
@@ -39,7 +40,8 @@ namespace API.Helpers
                 .ForMember(destiny => destiny.ProductImage, origin => origin.MapFrom<BasketProductUrlResolver>())
                 .ForMember(destiny => destiny.DoughName, origin => origin.MapFrom(s => s.Dough.Name))
                 .ForMember(destiny => destiny.SizeName, origin => origin.MapFrom(s => s.Size.Name))
-                .ForMember(destiny => destiny.Price, origin => origin.MapFrom<PriceResolver>());
+                .ForMember(destiny => destiny.Price, origin => origin.MapFrom<PriceResolver>())
+                .ForMember(destiny => destiny.IsDrink, origin => origin.MapFrom(s => s.Product.CategoryId == Categories.DrinkId));
 
             CreateMap<BasketIngredient, GetBasketIngredientDto>()
                 .ForMember(destiny => destiny.IngredientName, origin => origin.MapFrom(s => s.Ingredient.Name))

@@ -15,6 +15,7 @@ namespace API.Dtos.Basket
         public string DoughName { get; set; }
         public int? SizeId { get; set; }
         public string SizeName { get; set; }
+        public bool IsDrink { get; set; }
         public List<GetBasketIngredientDto> Ingredients { get; set; }
     }
 }
