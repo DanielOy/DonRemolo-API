@@ -10,6 +10,8 @@ namespace API.Dtos.Basket
         [Required]
         public int Quantity { get; set; }
 
+        public int ProductRelationNumber { get; set; }
+
         public int? DoughId { get; set; }
         public int? SizeId { get; set; }
         public List<SaveBasketIngredientDto> Ingredients { get; set; }
