@@ -40,7 +40,8 @@ namespace API.Helpers
                 .ForMember(destiny => destiny.ProductImage, origin => origin.MapFrom<BasketProductUrlResolver>())
                 .ForMember(destiny => destiny.DoughName, origin => origin.MapFrom(s => s.Dough.Name))
                 .ForMember(destiny => destiny.SizeName, origin => origin.MapFrom(s => s.Size.Name))
-                .ForMember(destiny => destiny.Price, origin => origin.MapFrom<PriceResolver>())
+                .ForMember(destiny => destiny.ProductPrice, origin => origin.MapFrom<ProductPriceResolver>())
+                .ForMember(destiny => destiny.IngredientsPrice, origin => origin.MapFrom<IngredientsPriceResolver>())
                 .ForMember(destiny => destiny.IsDrink, origin => origin.MapFrom(s => s.Product.CategoryId == Categories.DrinkId));
 
             CreateMap<BasketIngredient, GetBasketIngredientDto>()

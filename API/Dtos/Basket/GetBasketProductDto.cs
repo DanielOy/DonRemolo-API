@@ -8,9 +8,10 @@ namespace API.Dtos.Basket
         public string ProductName { get; set; }
         public string ProductImage { get; set; }
         public int ProductRelationNumber { get; set; }
-        public decimal Price { get; set; }
+        public decimal ProductPrice { get; set; }
+        public decimal IngredientsPrice { get; set; }
         public int Quantity { get; set; }
-        public decimal SubTotal => Price * Quantity;
+        public decimal SubTotal => (ProductPrice + IngredientsPrice) * Quantity;
 
         public int? DoughId { get; set; }
         public string DoughName { get; set; }
