@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Constants;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,8 +25,11 @@ namespace API.Dtos.Basket
         public DateTime DeliveryTime { get; set; }
         public bool IsCashPayment { get; set; }
         public decimal Cash { get; set; }
-
-        public decimal Total => (Products?.Sum(x => x.SubTotal) ?? 0.0m) + (Promotions?.Sum(x => x.SubTotal) ?? 0.0m);
+        public decimal DeliveryPrice => AtHome ? Delivery.DeliveryPrice : 0;
+        public decimal Total
+            => (Products?.Sum(x => x.SubTotal) ?? 0.0m)
+            + (Promotions?.Sum(x => x.SubTotal) ?? 0.0m)
+            + DeliveryPrice;
 
         public List<GetBasketProductDto> Products { get; set; }
         public List<GetBasketPromotionDto> Promotions { get; set; }

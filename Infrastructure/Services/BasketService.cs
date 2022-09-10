@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Core.Constants;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
@@ -107,7 +108,7 @@ namespace Infrastructure.Services
             order.Status = Order.OrderStatus.Ordered;
             order.Id = orderId;
             order.Total = (order.Products?.Sum(x => x.Price * x.Quantity) ?? 0)
-                + (order.Promotions?.Sum(x => x.Price * x.Quantity) ?? 0);
+                + (order.Promotions?.Sum(x => x.Price * x.Quantity) ?? 0) + (order.AtHome ? Delivery.DeliveryPrice : 0);
 
             _unitOfWork.Orders.Insert(order);
             await DeleteBasket(basketId);
