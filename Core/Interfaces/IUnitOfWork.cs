@@ -26,6 +26,8 @@ namespace Core.Interfaces
         public IGenericRepository<OrderPromotion> OrderPromotions { get; }
         public IGenericRepository<OrderPromotionItem> OrderPromotionItems { get; }
 
+        public IGenericRepository<Comment> Comments { get; }
+
         Task Save();
     }
 }

@@ -29,6 +29,8 @@ namespace Infrastructure.Data
         public IGenericRepository<OrderPromotion> OrderPromotions { get; set; }
         public IGenericRepository<OrderPromotionItem> OrderPromotionItems { get; set; }
 
+        public IGenericRepository<Comment> Comments { get; set; }
+
         public UnitOfWork(StoreContext context)
         {
             _context = context;
@@ -52,6 +54,8 @@ namespace Infrastructure.Data
             OrderIngredients = new GenericRepository<OrderIngredient>(_context);
             OrderPromotions = new GenericRepository<OrderPromotion>(_context);
             OrderPromotionItems = new GenericRepository<OrderPromotionItem>(_context);
+
+            Comments = new GenericRepository<Comment>(_context);
         }
 
         public async Task Save()

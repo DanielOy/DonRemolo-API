@@ -85,6 +85,8 @@ namespace API.Helpers
 
             CreateMap<OrderPromotionItem, OrderPromotionItemDto>()
                 .ForMember(destiny => destiny.ProductName, origin => origin.MapFrom(s => s.Product.Name));
+
+            CreateMap<CommentDto, Comment>();
         }
     }
 }

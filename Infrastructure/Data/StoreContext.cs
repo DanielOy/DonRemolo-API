@@ -73,5 +73,7 @@ namespace Infrastructure.Data
         public DbSet<OrderIngredient> OrderIngredients { get; set; }
         public DbSet<OrderPromotion> OrderPromotions { get; set; }
         public DbSet<OrderPromotionItem> OrderPromotionItems { get; set; }
+
+        public DbSet<Comment> Comments { get; set; }
     }
 }
