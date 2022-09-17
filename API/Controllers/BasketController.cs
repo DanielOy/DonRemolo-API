@@ -62,12 +62,12 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetBasketDto>> GetBasketById(string id)
+        public async Task<ActionResult<GetBasketDto>> GetBasketById(Guid id)
         {
-            var order = await _basketService.GetBasketById(new Guid(id));
+            var order = await _basketService.GetBasketById(id);
 
             if (order is null)
-                return Ok(new GetBasketDto(id));
+                return Ok(new GetBasketDto(id.ToString()));
 
             var basket = _mapper.Map<GetBasketDto>(order);
 
@@ -102,10 +102,9 @@ namespace API.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteBasket(string id)
+        public async Task<ActionResult> DeleteBasket(Guid id)
         {
-            var guid = new Guid(id);
-            var basket = await _basketService.GetBasketById(guid);
+            var basket = await _basketService.GetBasketById(id);
 
             if (!CurrentUserCanUseBasket(basket).Result)
             {
@@ -113,7 +112,7 @@ namespace API.Controllers
                     new ApiErrorResponse(HttpStatusCode.Unauthorized, "User can't delete this basket"));
             }
 
-            await _basketService.DeleteBasket(guid);
+            await _basketService.DeleteBasket(id);
             return Ok();
         }
 
@@ -125,14 +124,22 @@ namespace API.Controllers
         }
 
         [HttpPost("OrderBasket")]
-        public async Task<ActionResult<string>> ConfirmBasket(string basketId)
+        public async Task<ActionResult<string>> ConfirmBasket(Guid basketId)
         {
-            string orderId = await _basketService.ConfirmBasket(new Guid(basketId));
+            string orderId = await _basketService.ConfirmBasket(basketId);
 
             if (orderId == string.Empty)
                 return NotFound();
 
             return Ok(orderId);
+        }
+
+        [HttpPost("ProductsCount")]
+        public async Task<ActionResult<int>> GetProductsCount(Guid basketId)
+        {
+            int count = await _basketService.GetProductsCount(basketId);
+
+            return Ok(count);
         }
     }
 }

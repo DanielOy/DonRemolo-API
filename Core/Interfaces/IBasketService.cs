@@ -11,5 +11,6 @@ namespace Core.Interfaces
         Task<Basket> UpdateBasket(Basket order);
         Task DeleteBasket(Guid id);
         Task<string> ConfirmBasket(Guid basketId);
+        Task<int> GetProductsCount(Guid basketId);
     }
 }

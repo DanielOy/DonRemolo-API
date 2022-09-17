@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace API.Dtos
 {
@@ -8,7 +9,7 @@ namespace API.Dtos
         [Range(1, 5)]
         public int Calification { get; set; }
         
-        public string Category { get; set; }
+        public List<string> Categories { get; set; }
         
         [Required]
         public string Comments { get; set; }

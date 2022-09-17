@@ -40,7 +40,7 @@ namespace API.Helpers
                 .ForMember(destiny => destiny.ProductImage, origin => origin.MapFrom<BasketProductUrlResolver>())
                 .ForMember(destiny => destiny.DoughName, origin => origin.MapFrom(s => s.Dough.Name))
                 .ForMember(destiny => destiny.SizeName, origin => origin.MapFrom(s => s.Size.Name))
-                .ForMember(destiny => destiny.ProductPrice, origin => origin.MapFrom<ProductPriceResolver>())
+                .ForMember(destiny => destiny.ProductPrice, origin => origin.MapFrom(s => s.Size.Price))
                 .ForMember(destiny => destiny.IngredientsPrice, origin => origin.MapFrom<IngredientsPriceResolver>())
                 .ForMember(destiny => destiny.IsDrink, origin => origin.MapFrom(s => s.Product.CategoryId == Categories.DrinkId));
 
@@ -86,7 +86,8 @@ namespace API.Helpers
             CreateMap<OrderPromotionItem, OrderPromotionItemDto>()
                 .ForMember(destiny => destiny.ProductName, origin => origin.MapFrom(s => s.Product.Name));
 
-            CreateMap<CommentDto, Comment>();
+            CreateMap<CommentDto, Comment>()
+                .ForMember(destiny => destiny.Category, origin => origin.MapFrom(s => string.Join("|", s.Categories)));
         }
     }
 }

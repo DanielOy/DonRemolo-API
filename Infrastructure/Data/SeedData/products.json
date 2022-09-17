@@ -1,465 +1,15 @@
 ﻿[
   {
     "Id": 1,
-    "Name": "Fugazzeta",
-    "Description": "Fugazzeta",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
+    "Name": "Pizza Mozzarella",
+    "Description": "Doble queso mozarella",
+    "Picture": "1c3b6494-d8a6-4541-b4f5-5e7efc6f83b4.png",
+    "Price": 12,
     "CategoryId": 1,
     "MostPopular": false
   },
   {
     "Id": 2,
-    "Name": "Napolitana",
-    "Description": "Napolitana",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 3,
-    "Name": "Jamón cocido",
-    "Description": "Jamón cocido",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 4,
-    "Name": "Calabresa",
-    "Description": "Calabresa",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 5,
-    "Name": "Provolone",
-    "Description": "Provolone",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 6,
-    "Name": "Especial",
-    "Description": "Especial",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 7,
-    "Name": "Rúcula",
-    "Description": "Rúcula",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 8,
-    "Name": "4 Quesos",
-    "Description": "4 Quesos",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 9,
-    "Name": "Burrata",
-    "Description": "Burrata",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 10,
-    "Name": "Appieto",
-    "Description": "Appieto",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 11,
-    "Name": "De mar",
-    "Description": "De mar",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 12,
-    "Name": "4 Estaciones",
-    "Description": "4 Estaciones",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 13,
-    "Name": "Ramona",
-    "Description": "Ramona",
-    "Picture": "5cfce999-d6e8-45eb-95dc-e80552cc0b65.png",
-    "Price": 1,
-    "CategoryId": 1,
-    "MostPopular": false
-  },
-  {
-    "Id": 14,
-    "Name": "Pappardele",
-    "Description": "Pappardele",
-    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png",
-    "Price": 1,
-    "CategoryId": 2,
-    "MostPopular": false
-  },
-  {
-    "Id": 15,
-    "Name": "Ñoquis",
-    "Description": "Ñoquis",
-    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png",
-    "Price": 1,
-    "CategoryId": 2,
-    "MostPopular": false
-  },
-  {
-    "Id": 16,
-    "Name": "Ravioles de calabaza y castañas",
-    "Description": "Ravioles de calabaza y castañas",
-    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png",
-    "Price": 1,
-    "CategoryId": 2,
-    "MostPopular": false
-  },
-  {
-    "Id": 17,
-    "Name": "Sorrentino de Jamón crudo y queso",
-    "Description": "Sorrentino de Jamón crudo y queso",
-    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png",
-    "Price": 1,
-    "CategoryId": 2,
-    "MostPopular": false
-  },
-  {
-    "Id": 18,
-    "Name": "Lasagna de carne",
-    "Description": "Lasagna de carne",
-    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png",
-    "Price": 1,
-    "CategoryId": 2,
-    "MostPopular": false
-  },
-  {
-    "Id": 19,
-    "Name": "Lasagna de verduras",
-    "Description": "Lasagna de verduras",
-    "Picture": "9dd6681d-00ae-44be-b650-b26b7b994d8c.png",
-    "Price": 1,
-    "CategoryId": 2,
-    "MostPopular": false
-  },
-  {
-    "Id": 20,
-    "Name": "Carne",
-    "Description": "Carne",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 21,
-    "Name": "Carne Molida",
-    "Description": "Carne Molida",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 22,
-    "Name": "Pollo",
-    "Description": "Pollo",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 23,
-    "Name": "Jamón y Queso",
-    "Description": "Jamón y Queso",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 24,
-    "Name": "Tipo Árabe",
-    "Description": "Tipo Árabe",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 25,
-    "Name": "Carne cortada a cuchillo",
-    "Description": "Carne cortada a cuchillo",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 26,
-    "Name": "Choclo y queso",
-    "Description": "Choclo y queso",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 27,
-    "Name": "Champiñones",
-    "Description": "Champiñones",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 28,
-    "Name": "Palmito",
-    "Description": "Palmito",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 29,
-    "Name": "Verdura completa",
-    "Description": "Verdura completa",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 30,
-    "Name": "Panceta, mozzarella y ciruela",
-    "Description": "Panceta, mozzarella y ciruela",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 31,
-    "Name": "4 quesos y jamón",
-    "Description": "4 quesos y jamón",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 32,
-    "Name": "Roquefort, apio y nuez",
-    "Description": "Roquefort, apio y nuez",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 33,
-    "Name": "Camarones",
-    "Description": "Camarones",
-    "Picture": "72c1d562-4f09-42cc-9122-7c968accbe97.png",
-    "Price": 1,
-    "CategoryId": 3,
-    "MostPopular": false
-  },
-  {
-    "Id": 34,
-    "Name": "Agua",
-    "Description": "Agua",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 35,
-    "Name": "Agua mineral",
-    "Description": "Agua Mineral",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 36,
-    "Name": "Agua saborizada",
-    "Description": "Agua saborizada",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 37,
-    "Name": "Gaseosa",
-    "Description": "Gaseosa",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 38,
-    "Name": "Limonada",
-    "Description": "Limonada",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 39,
-    "Name": "Stella",
-    "Description": "Stella",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 40,
-    "Name": "Heineken",
-    "Description": "Heineken",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 41,
-    "Name": "Bud",
-    "Description": "Bud",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 42,
-    "Name": "Santa Julia",
-    "Description": "Santa Julia",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 43,
-    "Name": "Portillo",
-    "Description": "Portillo",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 44,
-    "Name": "Killka",
-    "Description": "Killka",
-    "Picture": "8b40d6ce-6466-42fb-a509-c8956eda8841.png",
-    "Price": 1,
-    "CategoryId": 4,
-    "MostPopular": false
-  },
-  {
-    "Id": 45,
-    "Name": "Pie Limón",
-    "Description": "Pie Limón",
-    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
-    "Price": 1,
-    "CategoryId": 5,
-    "MostPopular": false
-  },
-  {
-    "Id": 46,
-    "Name": "Pie Frutilla",
-    "Description": "Pie Frutilla",
-    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
-    "Price": 1,
-    "CategoryId": 5,
-    "MostPopular": false
-  },
-  {
-    "Id": 47,
-    "Name": "Pie Frutos rojos",
-    "Description": "Pie Frutos rojos",
-    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
-    "Price": 1,
-    "CategoryId": 5,
-    "MostPopular": false
-  },
-  {
-    "Id": 48,
-    "Name": "Helado Frutilla",
-    "Description": "Helado Frutilla",
-    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
-    "Price": 1,
-    "CategoryId": 5,
-    "MostPopular": false
-  },
-  {
-    "Id": 49,
-    "Name": "Helado Chocolate",
-    "Description": "Helado Chocolate",
-    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
-    "Price": 1,
-    "CategoryId": 5,
-    "MostPopular": false
-  },
-  {
-    "Id": 50,
-    "Name": "Helado Cereza",
-    "Description": "Helado Cereza",
-    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
-    "Price": 1,
-    "CategoryId": 5,
-    "MostPopular": false
-  },
-  {
-    "Id": 51,
-    "Name": "Helado Limón",
-    "Description": "Helado Limón",
-    "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
-    "Price": 1,
-    "CategoryId": 5,
-    "MostPopular": false
-  },
-  {
-    "Id": 52,
     "Name": "Pizza Pepperoni",
     "Description": "Queso Mozarella, provolone, permesano, doble pepperoni y oregano.",
     "Picture": "0cf31889-b741-42ab-badb-5b327ac8adda.jpg",
@@ -468,16 +18,106 @@
     "MostPopular": true
   },
   {
-    "Id": 53,
+    "Id": 3,
+    "Name": "Pizza Jamón",
+    "Description": "Queso Mozarella, parmesano, doble jamón y orégano.",
+    "Picture": "2a81772a-49aa-411d-9b91-f6777b008aa9.png",
+    "Price": 12.00,
+    "CategoryId": 1,
+    "MostPopular": false
+  },
+  {
+    "Id": 4,
+    "Name": "Pizza Vegetariana",
+    "Description": "Queso Mozarella, jamón, piña y extra queso.",
+    "Picture": "5569115f-1234-45ee-9541-87bb1bcb6667.png",
+    "Price": 12.00,
+    "CategoryId": 1,
+    "MostPopular": false
+  },
+  {
+    "Id": 5,
+    "Name": "Pizza Española",
+    "Description": "Queso mozarella, chorizo, cebolla blanca, aceitunas verdes, aceitunas negras, champiñones y salsa de ajo.",
+    "Picture": "d0e682c6-5ecd-4cfc-9c6c-9d295635cb80.png",
+    "Price": 12.00,
+    "CategoryId": 1,
+    "MostPopular": false
+  },
+  {
+    "Id": 6,
+    "Name": "Pizza Super Margarita 6 Quesos",
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet morbi mattis accumsan, in.",
+    "Picture": "16122406-e93e-44e0-a146-89d2f966bcd1.png",
+    "Price": 12.00,
+    "CategoryId": 1,
+    "MostPopular": false
+  },
+  {
+    "Id": 7,
+    "Name": "Pizza Continental",
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet morbi mattis accumsan, in.",
+    "Picture": "b1a1b09c-2653-4f09-9e99-aa74d8b42c8d.png",
+    "Price": 12.00,
+    "CategoryId": 1,
+    "MostPopular": false
+  },
+  {
+    "Id": 8,
+    "Name": "Pizza Hawaiana",
+    "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet morbi mattis accumsan, in.",
+    "Picture": "7a1465b0-467e-47b7-99c9-d248509a1577.png",
+    "Price": 12.00,
+    "CategoryId": 1,
+    "MostPopular": false
+  },
+  {
+    "Id": 9,
+    "Name": "Pizza Vegan Royal",
+    "Description": "Queso Vegano, champiñones, pimiento, aceitunas, carne NotMeat y orégano.",
+    "Picture": "bb8ab069-cbe4-4b8e-83a7-7cc31f9435e7.png",
+    "Price": 12.00,
+    "CategoryId": 1,
+    "MostPopular": false
+  },
+  {
+    "Id": 10,
+    "Name": "Pizza Crispy Chicken",
+    "Description": "Queso mozzarella, provolone, fontina y asiago; chicken poppers, tomate en cubos, cebolla roja y sa...",
+    "Picture": "6b7c3a04-199d-4ec9-9c54-31b7452c2458.png",
+    "Price": 12.00,
+    "CategoryId": 1,
+    "MostPopular": false
+  },
+  {
+    "Id": 11,
     "Name": "Pizza de todas carnes",
     "Description": "Queso mozzarella, carne de res, pepperoni, salchicha de cerdo, tocino y jamón.",
-    "Picture": "5190cc8a-8809-424f-abb1-a7e465c9f5e2.jpg",
+    "Picture": "837afc36-3c86-417b-ab49-79ead37fe2b5.png",
     "Price": 12.00,
     "CategoryId": 1,
     "MostPopular": true
   },
   {
-    "Id": 54,
+    "Id": 12,
+    "Name": "Empanada de carne",
+    "Description": "Carne molida de res, cebolla, ajo, orégano, comino, achiote, sal, y pimienta.",
+    "Picture": "184f8b70-6761-4f77-ba46-e59873b51e98.png",
+    "Price": 1.20,
+    "CategoryId": 3,
+    "MostPopular": false
+  },
+  {
+    "Id": 13,
+    "Name": "Empanada de atún",
+    "Description": "Atún, pimientos dulces, cebolla, aceituna, alcaparras, pimentón y orégano.",
+    "Picture": "075e974e-6876-478b-ac99-aa922348e839.png",
+    "Price": 1.20,
+    "CategoryId": 3,
+    "MostPopular": false
+  },
+  {
+    "Id": 14,
     "Name": "Empanada de jamón y queso",
     "Description": "Jamón y queso mozzarella.",
     "Picture": "f55a8791-7b8f-4401-9e98-5329eca44b50.jpg",
@@ -486,12 +126,103 @@
     "MostPopular": true
   },
   {
-    "Id": 55,
+    "Id": 15,
+    "Name": "Agua sin gas",
+    "Picture": "41f29dec-87bc-440a-b3c9-2c85f81bff74.png",
+    "Price": 0.50,
+    "CategoryId": 4,
+    "MostPopular": false
+  },
+  {
+    "Id": 16,
+    "Name": "Agua con gas",
+    "Picture": "b0c58669-7661-450a-af8b-3da52f7a887f.png",
+    "Price": 0.50,
+    "CategoryId": 4,
+    "MostPopular": false
+  },
+  {
+    "Id": 17,
+    "Name": "Coca-Cola 250 mL.",
+    "Picture": "fe42dd9f-bb07-4e4f-92de-6b7934ee2933.png",
+    "Price": 1.00,
+    "CategoryId": 4,
+    "MostPopular": false
+  },
+  {
+    "Id": 18,
+    "Name": "Coca-Cola 1L.",
+    "Picture": "c806d5c1-1646-4081-9694-eca4d9cc5777.png",
+    "Price": 1.80,
+    "CategoryId": 4,
+    "MostPopular": false
+  },
+  {
+    "Id": 19,
+    "Name": "Sprite 250 mL.",
+    "Picture": "aafcadec-cde5-4257-9162-5970b7c82162.png",
+    "Price": 1.00,
+    "CategoryId": 4,
+    "MostPopular": false
+  },
+  {
+    "Id": 20,
+    "Name": "Sprite 1L.",
+    "Picture": "1d55d4a4-f971-4a24-9965-98321d927c3b.png",
+    "Price": 1.80,
+    "CategoryId": 4,
+    "MostPopular": false
+  },
+  {
+    "Id": 21,
+    "Name": "Heineken",
+    "Picture": "14e1dcee-5291-48fc-95a9-06ea0c9b0006.png",
+    "Price": 2.00,
+    "CategoryId": 4,
+    "MostPopular": false
+  },
+  {
+    "Id": 22,
+    "Name": "Stella",
+    "Picture": "2efdae75-ff8a-4a12-b09a-ed53c017f384.png",
+    "Price": 2.00,
+    "CategoryId": 4,
+    "MostPopular": false
+  },
+  {
+    "Id": 23,
     "Name": "Chocolate",
     "Description": "Disfruta de la clasica torta de chocolate como si fuera hecho en casa.",
     "Picture": "7c41c034-0218-4900-b204-3d8e8f0cb681.jpg",
     "Price": 2.50,
     "CategoryId": 5,
     "MostPopular": true
+  },
+  {
+    "Id": 24,
+    "Name": "Cheescake de frutilla",
+    "Description": "Cheesecake o pastel de queso con leche condensada, crema y vainilla",
+    "Picture": "1d0f5526-d5a1-4687-a33e-6471fc25c608.png",
+    "Price": 2.50,
+    "CategoryId": 5,
+    "MostPopular": false
+  },
+  {
+    "Id": 25,
+    "Name": "Torta helada almendrado",
+    "Description": "Un brazo de torta almendrado de 6 porciones.",
+    "Picture": "3dbfc2a4-cd7b-4010-9c3c-29a513d002a5.png",
+    "Price": 7.00,
+    "CategoryId": 5,
+    "MostPopular": false
+  },
+  {
+    "Id": 26,
+    "Name": "Caja de bombones",
+    "Description": "Caja de 16 bombones de chocolate negro y con leche.",
+    "Picture": "299a74a6-a741-48c6-a356-847877faff0b.png",
+    "Price": 5.00,
+    "CategoryId": 5,
+    "MostPopular": false
   }
 ]

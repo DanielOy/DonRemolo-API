@@ -115,5 +115,20 @@ namespace Infrastructure.Services
 
             return orderId.ToString();
         }
+
+        public async Task<int> GetProductsCount(Guid basketId)
+        {
+            var spec = new BasketWithProductsSpec(basketId);
+
+            var basket = await _unitOfWork.Baskets.GetBySpecification(spec);
+
+            if (basket is null || (basket.Products?.Count ?? 0) == 0)
+                return 0;
+
+            return basket.Products
+                .Select(x => new { x.ProductId, x.ProductRelationNumber })
+                .Distinct()
+                .Count();
+        }
     }
 }

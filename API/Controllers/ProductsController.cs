@@ -6,6 +6,7 @@ using Core.Interfaces;
 using Core.Specifications;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -54,6 +55,17 @@ namespace API.Controllers
             var data = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductDto>>(products);
 
             return Ok(data);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(ProductDto))]
+        public async Task<ActionResult<ProductDto>> GetProduct(int id)
+        {
+            var product = await _unitOfWork.Products.GetByID(id);
+
+            var productDto = _mapper.Map<ProductDto>(product);
+
+            return Ok(productDto);
         }
     }
 }
