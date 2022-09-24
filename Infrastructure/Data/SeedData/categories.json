@@ -28,5 +28,17 @@
     "Name": "Postres",
     "Picture": "b024bb7b-63f8-4100-a1d8-d0e6e25df714.png",
     "ShowInHome": true
+  },
+  {
+    "Id": 6,
+    "Name": "Clásicas",
+    "ShowInHome": false,
+    "ParentId": 1
+  },
+  {
+    "Id": 7,
+    "Name": "Especialidades",
+    "ShowInHome": false,
+    "ParentId": 1
   }
 ]

@@ -1,11 +1,13 @@
-﻿using API.Dtos;
+﻿using API.Dtos.Promotion;
 using AutoMapper;
 using Core.Entities;
 using Core.Interfaces;
+using Core.Specifications;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace API.Controllers
@@ -78,6 +80,33 @@ namespace API.Controllers
             await _unitOfWork.Save();
 
             return Ok();
+        }
+
+        [HttpGet("Rules/{id}")]
+        public async Task<ActionResult<PromotionRuleDto>> GetPromotionRules(int id)
+        {
+            var spec = new PromotionWithRulesSpec(id);
+
+            var promotion = await _unitOfWork.Promotions.GetBySpecification(spec);
+
+            if (promotion?.RuleItems?.Any(x => x.CategoryId > 0) ?? false)
+            {
+                foreach (var rule in promotion.RuleItems.Where(x => x.CategoryId > 0))
+                {
+                    var productSpec = new ProductByCategoryIdSpec(rule.CategoryId.Value);
+
+                    var products = (await _unitOfWork.Products
+                         .GetAllBySpecification(productSpec))
+                         .Select(x => new PromotionRuleProduct { ProductId = x.Id, Product = x })
+                         .ToList();
+
+                    rule.Products = products;
+                }
+            }
+
+            var promotionDto = _mapper.Map<PromotionRuleDto>(promotion);
+
+            return Ok(promotionDto);
         }
     }
 }

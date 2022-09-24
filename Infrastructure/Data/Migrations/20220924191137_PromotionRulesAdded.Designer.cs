@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(StoreContext))]
-    [Migration("20220806211029_OrderFieldsAdded")]
-    partial class OrderFieldsAdded
+    [Migration("20220924191137_PromotionRulesAdded")]
+    partial class PromotionRulesAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -101,7 +101,7 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int?>("ProductId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("PromotionId")
+                    b.Property<int>("ProductRelationNumber")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
@@ -118,11 +118,62 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("PromotionId");
-
                     b.HasIndex("SizeId");
 
                     b.ToTable("BasketProducts");
+                });
+
+            modelBuilder.Entity("Core.Entities.BasketPromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("BasketId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("PromotionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("PromotionId");
+
+                    b.ToTable("BasketPromotions");
+                });
+
+            modelBuilder.Entity("Core.Entities.BasketPromotionItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("BasketId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("BasketPromotionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("BasketId");
+
+                    b.HasIndex("BasketPromotionId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("BasketPromotionItems");
                 });
 
             modelBuilder.Entity("Core.Entities.Category", b =>
@@ -134,6 +185,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Picture")
                         .HasColumnType("TEXT");
 
@@ -142,7 +196,32 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ParentId");
+
                     b.ToTable("Categories");
+                });
+
+            modelBuilder.Entity("Core.Entities.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Calification")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Comments")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("Core.Entities.Dough", b =>
@@ -231,6 +310,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("INTEGER");
 
+                    b.Property<double>("Total")
+                        .HasColumnType("REAL");
+
                     b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
@@ -277,10 +359,10 @@ namespace Infrastructure.Data.Migrations
                     b.Property<Guid>("OrderId")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("INTEGER");
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
 
-                    b.Property<int?>("PromotionId")
+                    b.Property<int?>("ProductId")
                         .HasColumnType("INTEGER");
 
                     b.Property<int>("Quantity")
@@ -297,11 +379,63 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.HasIndex("PromotionId");
-
                     b.HasIndex("SizeId");
 
                     b.ToTable("OrderProducts");
+                });
+
+            modelBuilder.Entity("Core.Entities.OrderPromotion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("REAL");
+
+                    b.Property<int?>("PromotionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("PromotionId");
+
+                    b.ToTable("OrderPromotions");
+                });
+
+            modelBuilder.Entity("Core.Entities.OrderPromotionItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("OrderPromotionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderPromotionId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderPromotionItems");
                 });
 
             modelBuilder.Entity("Core.Entities.Product", b =>
@@ -360,6 +494,57 @@ namespace Infrastructure.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Promotions");
+                });
+
+            modelBuilder.Entity("Core.Entities.PromotionRuleItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("PromotionId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("SizeId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PromotionId");
+
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("PromotionRuleItems");
+                });
+
+            modelBuilder.Entity("Core.Entities.PromotionRuleProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PromotionRuleItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("PromotionRuleItemId");
+
+                    b.ToTable("PromotionRuleProducts");
                 });
 
             modelBuilder.Entity("Core.Entities.Size", b =>
@@ -434,6 +619,9 @@ namespace Infrastructure.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("ProfilePictureUrl")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ResetPasswordCode")
                         .HasColumnType("TEXT");
@@ -614,7 +802,7 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.BasketProduct", b =>
                 {
-                    b.HasOne("Core.Entities.Basket", null)
+                    b.HasOne("Core.Entities.Basket", "Basket")
                         .WithMany("Products")
                         .HasForeignKey("BasketId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -628,21 +816,70 @@ namespace Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId");
 
-                    b.HasOne("Core.Entities.Promotion", "Promotion")
-                        .WithMany()
-                        .HasForeignKey("PromotionId");
-
                     b.HasOne("Core.Entities.Size", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId");
+
+                    b.Navigation("Basket");
 
                     b.Navigation("Dough");
 
                     b.Navigation("Product");
 
-                    b.Navigation("Promotion");
-
                     b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("Core.Entities.BasketPromotion", b =>
+                {
+                    b.HasOne("Core.Entities.Basket", "Basket")
+                        .WithMany("Promotions")
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Promotion", "Promotion")
+                        .WithMany()
+                        .HasForeignKey("PromotionId");
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("Promotion");
+                });
+
+            modelBuilder.Entity("Core.Entities.BasketPromotionItem", b =>
+                {
+                    b.HasOne("Core.Entities.Basket", "Basket")
+                        .WithMany()
+                        .HasForeignKey("BasketId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.BasketPromotion", "BasketPromotion")
+                        .WithMany("Items")
+                        .HasForeignKey("BasketPromotionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Basket");
+
+                    b.Navigation("BasketPromotion");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("Core.Entities.Category", b =>
+                {
+                    b.HasOne("Core.Entities.Category", "ParentCategory")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("ParentCategory");
                 });
 
             modelBuilder.Entity("Core.Entities.Dough", b =>
@@ -707,10 +944,6 @@ namespace Infrastructure.Data.Migrations
                         .WithMany()
                         .HasForeignKey("ProductId");
 
-                    b.HasOne("Core.Entities.Promotion", "Promotion")
-                        .WithMany()
-                        .HasForeignKey("PromotionId");
-
                     b.HasOne("Core.Entities.Size", "Size")
                         .WithMany()
                         .HasForeignKey("SizeId");
@@ -719,9 +952,41 @@ namespace Infrastructure.Data.Migrations
 
                     b.Navigation("Product");
 
-                    b.Navigation("Promotion");
-
                     b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("Core.Entities.OrderPromotion", b =>
+                {
+                    b.HasOne("Core.Entities.Order", null)
+                        .WithMany("Promotions")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Promotion", "Promotion")
+                        .WithMany()
+                        .HasForeignKey("PromotionId");
+
+                    b.Navigation("Promotion");
+                });
+
+            modelBuilder.Entity("Core.Entities.OrderPromotionItem", b =>
+                {
+                    b.HasOne("Core.Entities.OrderPromotion", "OrderPromotion")
+                        .WithMany("Items")
+                        .HasForeignKey("OrderPromotionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("OrderPromotion");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Core.Entities.Product", b =>
@@ -733,6 +998,42 @@ namespace Infrastructure.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Core.Entities.PromotionRuleItem", b =>
+                {
+                    b.HasOne("Core.Entities.Promotion", "Promotion")
+                        .WithMany("RuleItems")
+                        .HasForeignKey("PromotionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Size", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId");
+
+                    b.Navigation("Promotion");
+
+                    b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("Core.Entities.PromotionRuleProduct", b =>
+                {
+                    b.HasOne("Core.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.PromotionRuleItem", "PromotionRuleItem")
+                        .WithMany("Products")
+                        .HasForeignKey("PromotionRuleItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("PromotionRuleItem");
                 });
 
             modelBuilder.Entity("Core.Entities.Size", b =>
@@ -800,6 +1101,8 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.Basket", b =>
                 {
                     b.Navigation("Products");
+
+                    b.Navigation("Promotions");
                 });
 
             modelBuilder.Entity("Core.Entities.BasketProduct", b =>
@@ -807,14 +1110,36 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Ingredients");
                 });
 
+            modelBuilder.Entity("Core.Entities.BasketPromotion", b =>
+                {
+                    b.Navigation("Items");
+                });
+
             modelBuilder.Entity("Core.Entities.Order", b =>
                 {
                     b.Navigation("Products");
+
+                    b.Navigation("Promotions");
                 });
 
             modelBuilder.Entity("Core.Entities.OrderProduct", b =>
                 {
                     b.Navigation("Ingredients");
+                });
+
+            modelBuilder.Entity("Core.Entities.OrderPromotion", b =>
+                {
+                    b.Navigation("Items");
+                });
+
+            modelBuilder.Entity("Core.Entities.Promotion", b =>
+                {
+                    b.Navigation("RuleItems");
+                });
+
+            modelBuilder.Entity("Core.Entities.PromotionRuleItem", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

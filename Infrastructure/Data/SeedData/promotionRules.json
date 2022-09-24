@@ -1,0 +1,122 @@
+[
+  {
+    "Id": 1,
+    "PromotionId": 1,
+    "CategoryId": 6,
+    "GroupName": "Pizzas",
+    "Quantity": 2,
+    "SizeId": 2
+  },
+  {
+    "Id": 2,
+    "PromotionId": 1,
+    "GroupName": "Gaseosas",
+    "Quantity": 2,
+    "Products": [
+      {
+        "Id": 1,
+        "PromotionRuleItemId": 2,
+        "ProductId": 17
+      },
+      {
+        "Id": 2,
+        "PromotionRuleItemId": 2,
+        "ProductId": 19
+      }
+    ]
+  },
+  {
+    "Id": 3,
+    "PromotionId": 1,
+    "CategoryId": 5,
+    "GroupName": "Postres",
+    "Quantity": 2
+  },
+  {
+    "Id": 4,
+    "PromotionId": 2,
+    "CategoryId": 1,
+    "GroupName": "Pizzas",
+    "Quantity": 2,
+    "SizeId": 2
+  },
+  {
+    "Id": 5,
+    "PromotionId": 2,
+    "GroupName": "Gaseosas",
+    "Quantity": 2,
+    "Products": [
+      {
+        "Id": 3,
+        "PromotionRuleItemId": 5,
+        "ProductId": 17
+      },
+      {
+        "Id": 4,
+        "PromotionRuleItemId": 5,
+        "ProductId": 19
+      }
+    ]
+  },
+  {
+    "Id": 6,
+    "PromotionId": 2,
+    "GroupName": "Empanadas",
+    "Quantity": 1,
+    "Products": [
+      {
+        "Id": 5,
+        "PromotionRuleItemId": 6,
+        "ProductId": 13
+      }
+    ]
+  },
+  {
+    "Id": 7,
+    "PromotionId": 3,
+    "CategoryId": 6,
+    "GroupName": "Pizzas",
+    "Quantity": 2,
+    "SizeId": 3
+  },
+  {
+    "Id": 8,
+    "PromotionId": 3,
+    "GroupName": "Gaseosas",
+    "Quantity": 1,
+    "Products": [
+      {
+        "Id": 6,
+        "PromotionRuleItemId": 8,
+        "ProductId": 18
+      },
+      {
+        "Id": 7,
+        "PromotionRuleItemId": 8,
+        "ProductId": 20
+      }
+    ]
+  },
+  {
+    "Id": 9,
+    "PromotionId": 3,
+    "CategoryId": 5,
+    "GroupName": "Postres",
+    "Quantity": 2
+  },
+  {
+    "Id": 10,
+    "PromotionId": 3,
+    "CategoryId": 3,
+    "GroupName": "Empanadas",
+    "Quantity": 2
+  },
+  {
+    "Id": 11,
+    "PromotionId": 4,
+    "CategoryId": 6,
+    "GroupName": "Pizzas",
+    "Quantity": 2,
+    "SizeId": 3
+  }
+]

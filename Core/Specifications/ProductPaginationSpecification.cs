@@ -6,8 +6,12 @@ namespace Core.Specifications
     public class ProductPaginationSpecification : BaseSpecification<Product>
     {
         public ProductPaginationSpecification(ProductSpecParams postSpecParams) : base(x =>
-        (string.IsNullOrEmpty(postSpecParams.Search) || x.Description.ToLower().Contains(postSpecParams.Search))
-        && (string.IsNullOrEmpty(postSpecParams.Category) || x.Category.Name.ToLower().Equals(postSpecParams.Category)))
+        (string.IsNullOrEmpty(postSpecParams.Search)
+        || x.Description.ToLower().Contains(postSpecParams.Search))
+        && (string.IsNullOrEmpty(postSpecParams.Category)
+            || x.Category.Name.ToLower().Equals(postSpecParams.Category)
+        || (x.Category.ParentId != null
+            && x.Category.ParentCategory.Name.ToLower().Equals(postSpecParams.Category))))
         {
             ApplyPagging(postSpecParams.PageSize * (postSpecParams.PageIndex - 1), postSpecParams.PageSize);
 
@@ -33,7 +37,7 @@ namespace Core.Specifications
                 }
             }
 
-            AddInclude(x => x.Include(x => x.Category));
+            AddInclude(x => x.Include(x => x.Category).ThenInclude(x => x.ParentCategory));
         }
     }
 }

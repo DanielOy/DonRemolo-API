@@ -5,7 +5,7 @@
     "Description": "Doble queso mozarella",
     "Picture": "1c3b6494-d8a6-4541-b4f5-5e7efc6f83b4.png",
     "Price": 12,
-    "CategoryId": 1,
+    "CategoryId": 6,
     "MostPopular": false
   },
   {
@@ -14,7 +14,7 @@
     "Description": "Queso Mozarella, provolone, permesano, doble pepperoni y oregano.",
     "Picture": "0cf31889-b741-42ab-badb-5b327ac8adda.jpg",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 6,
     "MostPopular": true
   },
   {
@@ -23,7 +23,7 @@
     "Description": "Queso Mozarella, parmesano, doble jamón y orégano.",
     "Picture": "2a81772a-49aa-411d-9b91-f6777b008aa9.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 6,
     "MostPopular": false
   },
   {
@@ -32,7 +32,7 @@
     "Description": "Queso Mozarella, jamón, piña y extra queso.",
     "Picture": "5569115f-1234-45ee-9541-87bb1bcb6667.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 6,
     "MostPopular": false
   },
   {
@@ -41,7 +41,7 @@
     "Description": "Queso mozarella, chorizo, cebolla blanca, aceitunas verdes, aceitunas negras, champiñones y salsa de ajo.",
     "Picture": "d0e682c6-5ecd-4cfc-9c6c-9d295635cb80.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 7,
     "MostPopular": false
   },
   {
@@ -50,7 +50,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet morbi mattis accumsan, in.",
     "Picture": "16122406-e93e-44e0-a146-89d2f966bcd1.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 7,
     "MostPopular": false
   },
   {
@@ -59,7 +59,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet morbi mattis accumsan, in.",
     "Picture": "b1a1b09c-2653-4f09-9e99-aa74d8b42c8d.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 7,
     "MostPopular": false
   },
   {
@@ -68,7 +68,7 @@
     "Description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Amet morbi mattis accumsan, in.",
     "Picture": "7a1465b0-467e-47b7-99c9-d248509a1577.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 7,
     "MostPopular": false
   },
   {
@@ -77,7 +77,7 @@
     "Description": "Queso Vegano, champiñones, pimiento, aceitunas, carne NotMeat y orégano.",
     "Picture": "bb8ab069-cbe4-4b8e-83a7-7cc31f9435e7.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 7,
     "MostPopular": false
   },
   {
@@ -86,7 +86,7 @@
     "Description": "Queso mozzarella, provolone, fontina y asiago; chicken poppers, tomate en cubos, cebolla roja y sa...",
     "Picture": "6b7c3a04-199d-4ec9-9c54-31b7452c2458.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 7,
     "MostPopular": false
   },
   {
@@ -95,7 +95,7 @@
     "Description": "Queso mozzarella, carne de res, pepperoni, salchicha de cerdo, tocino y jamón.",
     "Picture": "837afc36-3c86-417b-ab49-79ead37fe2b5.png",
     "Price": 12.00,
-    "CategoryId": 1,
+    "CategoryId": 7,
     "MostPopular": true
   },
   {

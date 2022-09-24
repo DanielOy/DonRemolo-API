@@ -1,5 +1,6 @@
 ﻿using API.Dtos;
 using API.Dtos.Basket;
+using API.Dtos.Promotion;
 using AutoMapper;
 using Core.Constants;
 using Core.Entities;
@@ -28,6 +29,14 @@ namespace API.Helpers
 
             CreateMap<Promotion, PromotionViewDto>()
                 .ForMember(destiny => destiny.Picture, origin => origin.MapFrom<PromotionUrlResolver>());
+
+            CreateMap<Promotion, PromotionRuleDto>();
+            
+            CreateMap<PromotionRuleItem, PromotionRuleItemDto>()
+                .ForMember(destiny => destiny.Size, origin => origin.MapFrom(s => s.Size.Name));
+
+            CreateMap<PromotionRuleProduct, PromotionRuleProductDto>()
+                .ForMember(destiny => destiny.Name, origin => origin.MapFrom(s => s.Product.Name));
 
             CreateMap<Category, CategoryDto>()
                 .ForMember(destiny => destiny.Picture, origin => origin.MapFrom<CategoryUrlResolver>());

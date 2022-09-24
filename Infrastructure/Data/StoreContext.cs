@@ -55,18 +55,18 @@ namespace Infrastructure.Data
         }
 
         public DbSet<Promotion> Promotions { get; set; }
-        public DbSet<PromotionItem> PromotionItems { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Dough> Doughs { get; set; }
         public DbSet<Size> Sizes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
         public DbSet<Basket> Baskets { get; set; }
         public DbSet<BasketProduct> BasketProducts { get; set; }
         public DbSet<BasketIngredient> BasketIngredients { get; set; }
-        public DbSet<BasketPromotion> basketPromotions { get; set; }
-        public DbSet<BasketPromotionItem> basketPromotionItems { get; set; }
+        public DbSet<BasketPromotion> BasketPromotions { get; set; }
+        public DbSet<BasketPromotionItem> BasketPromotionItems { get; set; }
 
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderProduct> OrderProducts { get; set; }
@@ -74,6 +74,7 @@ namespace Infrastructure.Data
         public DbSet<OrderPromotion> OrderPromotions { get; set; }
         public DbSet<OrderPromotionItem> OrderPromotionItems { get; set; }
 
-        public DbSet<Comment> Comments { get; set; }
+        public DbSet<PromotionRuleItem> PromotionRuleItems { get; set; }
+        public DbSet<PromotionRuleProduct> PromotionRuleProducts { get; set; }
     }
 }

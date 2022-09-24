@@ -16,7 +16,9 @@ namespace Infrastructure.Data
         public IGenericRepository<Size> Sizes { get; }
         public IGenericRepository<Category> Categories { get; }
         public IGenericRepository<Promotion> Promotions { get; }
-        public IGenericRepository<PromotionItem> PromotionItems { get; set; }
+        public IGenericRepository<PromotionRuleItem> PromotionRuleItems { get; set; }
+        public IGenericRepository<PromotionRuleProduct> PromotionRuleProducts { get; set; }
+
         public IGenericRepository<Basket> Baskets { get; set; }
         public IGenericRepository<BasketProduct> BasketProducts { get; set; }
         public IGenericRepository<BasketIngredient> BasketIngredients { get; set; }
@@ -41,7 +43,8 @@ namespace Infrastructure.Data
             Sizes = new GenericRepository<Size>(_context);
             Categories = new GenericRepository<Category>(_context);
             Promotions = new GenericRepository<Promotion>(_context);
-            PromotionItems = new GenericRepository<PromotionItem>(_context);
+            PromotionRuleItems = new GenericRepository<PromotionRuleItem>(_context);
+            PromotionRuleProducts = new GenericRepository<PromotionRuleProduct>(_context);
 
             Baskets = new GenericRepository<Basket>(_context);
             BasketProducts = new GenericRepository<BasketProduct>(_context);

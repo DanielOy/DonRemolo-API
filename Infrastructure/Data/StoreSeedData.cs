@@ -72,6 +72,15 @@ namespace Infrastructure.Data
                     context.Promotions.AddRange(promotions);
                     await context.SaveChangesAsync();
                 }
+
+                if (!context.PromotionRuleItems.Any())
+                {
+                    var promotionsData = File.ReadAllText(path + @"/Data/SeedData/promotionRules.json");
+                    var promotionRules = JsonSerializer.Deserialize<List<PromotionRuleItem>>(promotionsData);
+
+                    context.PromotionRuleItems.AddRange(promotionRules);
+                    await context.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {

@@ -11,8 +11,11 @@ namespace Core.Interfaces
         public IGenericRepository<Dough> Doughs { get; }
         public IGenericRepository<Size> Sizes { get; }
         public IGenericRepository<Category> Categories { get; }
+        public IGenericRepository<Comment> Comments { get; }
+
         public IGenericRepository<Promotion> Promotions { get; }
-        public IGenericRepository<PromotionItem> PromotionItems { get; }
+        public IGenericRepository<PromotionRuleItem> PromotionRuleItems { get; }
+        public IGenericRepository<PromotionRuleProduct> PromotionRuleProducts { get; }
 
         public IGenericRepository<Basket> Baskets { get; }
         public IGenericRepository<BasketProduct> BasketProducts { get; }
@@ -26,7 +29,6 @@ namespace Core.Interfaces
         public IGenericRepository<OrderPromotion> OrderPromotions { get; }
         public IGenericRepository<OrderPromotionItem> OrderPromotionItems { get; }
 
-        public IGenericRepository<Comment> Comments { get; }
 
         Task Save();
     }

@@ -142,7 +142,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasIndex("PromotionId");
 
-                    b.ToTable("basketPromotions");
+                    b.ToTable("BasketPromotions");
                 });
 
             modelBuilder.Entity("Core.Entities.BasketPromotionItem", b =>
@@ -171,7 +171,7 @@ namespace Infrastructure.Data.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("basketPromotionItems");
+                    b.ToTable("BasketPromotionItems");
                 });
 
             modelBuilder.Entity("Core.Entities.Category", b =>
@@ -183,6 +183,9 @@ namespace Infrastructure.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Picture")
                         .HasColumnType("TEXT");
 
@@ -190,6 +193,8 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
 
                     b.ToTable("Categories");
                 });
@@ -489,14 +494,17 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Promotions");
                 });
 
-            modelBuilder.Entity("Core.Entities.PromotionItem", b =>
+            modelBuilder.Entity("Core.Entities.PromotionRuleItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("GroupName")
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("PromotionId")
                         .HasColumnType("INTEGER");
@@ -504,13 +512,37 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("Quantity")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Id");
+                    b.Property<int?>("SizeId")
+                        .HasColumnType("INTEGER");
 
-                    b.HasIndex("CategoryId");
+                    b.HasKey("Id");
 
                     b.HasIndex("PromotionId");
 
-                    b.ToTable("PromotionItems");
+                    b.HasIndex("SizeId");
+
+                    b.ToTable("PromotionRuleItems");
+                });
+
+            modelBuilder.Entity("Core.Entities.PromotionRuleProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PromotionRuleItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("PromotionRuleItemId");
+
+                    b.ToTable("PromotionRuleProducts");
                 });
 
             modelBuilder.Entity("Core.Entities.Size", b =>
@@ -839,6 +871,15 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("Core.Entities.Category", b =>
+                {
+                    b.HasOne("Core.Entities.Category", "ParentCategory")
+                        .WithMany()
+                        .HasForeignKey("ParentId");
+
+                    b.Navigation("ParentCategory");
+                });
+
             modelBuilder.Entity("Core.Entities.Dough", b =>
                 {
                     b.HasOne("Core.Entities.Category", "Category")
@@ -957,23 +998,40 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Core.Entities.PromotionItem", b =>
+            modelBuilder.Entity("Core.Entities.PromotionRuleItem", b =>
                 {
-                    b.HasOne("Core.Entities.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Core.Entities.Promotion", "Promotion")
-                        .WithMany("Items")
+                        .WithMany("RuleItems")
                         .HasForeignKey("PromotionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Category");
+                    b.HasOne("Core.Entities.Size", "Size")
+                        .WithMany()
+                        .HasForeignKey("SizeId");
 
                     b.Navigation("Promotion");
+
+                    b.Navigation("Size");
+                });
+
+            modelBuilder.Entity("Core.Entities.PromotionRuleProduct", b =>
+                {
+                    b.HasOne("Core.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.PromotionRuleItem", "PromotionRuleItem")
+                        .WithMany("Products")
+                        .HasForeignKey("PromotionRuleItemId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("PromotionRuleItem");
                 });
 
             modelBuilder.Entity("Core.Entities.Size", b =>
@@ -1074,7 +1132,12 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Promotion", b =>
                 {
-                    b.Navigation("Items");
+                    b.Navigation("RuleItems");
+                });
+
+            modelBuilder.Entity("Core.Entities.PromotionRuleItem", b =>
+                {
+                    b.Navigation("Products");
                 });
 #pragma warning restore 612, 618
         }

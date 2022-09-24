@@ -1,4 +1,4 @@
-﻿using API.Dtos;
+﻿using API.Dtos.Promotion;
 using AutoMapper;
 using Core.Entities;
 using Microsoft.Extensions.Configuration;

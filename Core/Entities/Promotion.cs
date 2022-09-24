@@ -17,6 +17,6 @@ namespace Core.Entities
         public decimal OriginalPrice { get; set; }
         public string Picture { get; set; }
 
-        public List<PromotionItem> Items { get; set; }
+        public List<PromotionRuleItem> RuleItems { get; set; }
     }
 }
