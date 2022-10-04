@@ -14,7 +14,6 @@ namespace API.Dtos
         [Required]
         public string Comments { get; set; }
 
-        [EmailAddress]
         public string Email { get; set; }
     }
 }
